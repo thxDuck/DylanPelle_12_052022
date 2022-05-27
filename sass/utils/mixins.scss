@@ -1,0 +1,31 @@
+@mixin row {
+    display: flex;
+    flex-direction: row;
+}
+
+@mixin row-justify($justify) {
+    @include row;
+    justify-content: $justify;
+}
+
+@mixin row-align($align) {
+    @include row;
+    align-content: $align;
+}
+
+
+
+@mixin col {
+    display: flex;
+    flex-direction: column;
+}
+
+@mixin col-justify($justify) {
+    @include col;
+    justify-content: $justify;
+}
+
+@mixin col-align($align) {
+    @include col;
+    align-items: $align;
+}

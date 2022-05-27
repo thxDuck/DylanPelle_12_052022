@@ -44,6 +44,7 @@ td, th {
 
 a {
   text-decoration: none;
+  color: unset;
 }
 
 a:visited {
@@ -52,6 +53,95 @@ a:visited {
 
 * {
   font-family: "Roboto", sans-serif;
+}
+
+nav {
+  height: 100%;
+}
+nav .navbar-top {
+  background-color: #020203;
+  color: #fff;
+  height: 90px;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+}
+nav .navbar-top .logo {
+  display: flex;
+  flex-direction: row;
+  padding-left: 25px;
+}
+nav .navbar-top .logo img {
+  margin: auto;
+}
+nav .navbar-top__pages {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+}
+nav .navbar-top__pages ul {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  font-size: 1.5rem;
+  padding: 30px 0px;
+}
+nav .navbar-left {
+  background-color: #020203;
+  color: #fff;
+  height: calc(100% - 90px);
+  width: 110px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+nav .navbar-left__activities {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+nav .navbar-left__activities ul {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 20px;
+}
+nav .navbar-left .copyright {
+  font-size: 0.75rem;
+  transform: rotate(-90deg);
+  width: max-content;
+  align-self: center;
+}
+nav li {
+  transition: all 0.3s ease-in-out;
+}
+nav li:hover {
+  transform: scale(1.15);
+}
+
+main {
+  border: 3px solid blue;
+  height: calc(100% - 90px);
+  width: calc(100% - 110px);
+  padding: 60px 100px;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+}
+main h1 {
+  font-size: 3rem;
+  font-weight: 500;
+}
+main h1 .username {
+  color: #E60000;
+}
+
+#root {
+  height: 100vh;
+  width: 100vw;
+  border: 5px solid #E60000;
+  overflow: hidden;
 }
 
 /*# sourceMappingURL=style.css.map */

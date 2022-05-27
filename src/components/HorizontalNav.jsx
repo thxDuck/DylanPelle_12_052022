@@ -1,0 +1,33 @@
+import React from "react";
+import Logo from "../assets/images/icons/logo.svg";
+
+const HorizontalNav = () => {
+	return (
+		<div className="navbar-top">
+			<div className="logo">
+				<img src={Logo} alt="courreur" />
+			</div>
+			<div className="navbar-top__pages">
+				<ul>
+					<li>
+						<a href="/Accueil">Accueil</a>
+					</li>
+
+					<li>
+						<a href="/Profil">Profil</a>
+					</li>
+
+					<li>
+						<a href="/Réglages">Réglage</a>
+					</li>
+
+					<li>
+						<a href="/Communauté">Communauté</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+	);
+};
+
+export default HorizontalNav;

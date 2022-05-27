@@ -1,13 +1,15 @@
-import Header from "./components/Header.jsx";
-import Footer from "./components/Footer.jsx";
+import Nav from "./components/Nav.jsx";
+import Main from "./components/Main.jsx";
+import "./styles/style.css";
+
+import { BrowserRouter } from "react-router-dom";
 
 function App() {
 	return (
-		<>
-			<Header />
-			<h1>Hello SportSee !</h1>
-			<Footer />
-		</>
+		<BrowserRouter>
+			<Nav />
+			<Main />
+		</BrowserRouter>
 	);
 }
 
