@@ -1,11 +1,15 @@
 import React from "react";
+import Header from "./Header.jsx";
+import Dashboard from "./Dashboard.jsx";
 
-export default function Main() {
+
+const Main = () => {
 	return (
 		<main>
-			<h1>
-				Bonjour <span className="username">Thomas</span>!
-			</h1>
+			<Header />
+			<Dashboard />
 		</main>
 	);
 }
+
+export default Main;
