@@ -170,22 +170,34 @@ main h1 .username {
 
 #calories {
   grid-area: 1/4/2/5;
-  background-color: #FBFBFB;
+}
+#calories .card__icon {
+  background-color: #ffcccc;
+  color: #FF0000;
 }
 
 #protein {
   grid-area: 2/4/3/5;
-  background-color: #FBFBFB;
+}
+#protein .card__icon {
+  background-color: #e3f4ff;
+  color: #4AB8FF;
 }
 
 #carb {
   grid-area: 3/4/4/5;
-  background-color: #FBFBFB;
+}
+#carb .card__icon {
+  background-color: #feefb3;
+  color: #FDCC0C;
 }
 
 #lipid {
   grid-area: 4/4/5/5;
-  background-color: #FBFBFB;
+}
+#lipid .card__icon {
+  background-color: #ffe8ef;
+  color: #FD5181;
 }
 
 #averageSessions {
@@ -249,6 +261,40 @@ main h1 .username {
 #dailyActivity .recharts-legend-item-text {
   color: #74798C !important;
   font-size: 0.85rem;
+}
+
+.card {
+  background-color: #FBFBFB;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 1em;
+  padding-left: 20%;
+  border-radius: 6px;
+}
+.card__icon {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border-radius: 6px;
+  padding: 1rem;
+}
+.card__icon img {
+  width: 20px;
+}
+.card__text {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+}
+.card__text--val {
+  font-weight: 700;
+  color: #282D30;
+}
+.card__text--title {
+  font-size: 0.8rem;
+  color: #74798C;
 }
 
 #root {

@@ -1,0 +1,35 @@
+.card {
+    background-color: $light-gray;
+    @include row;
+    align-items: center;
+    gap: 1em;
+    padding-left: 20%;
+    border-radius: 6px;
+
+    &__icon {
+        @include col-justify(center);
+
+        border-radius: 6px;
+        padding: 1rem;
+
+        img {
+            width: 20px;
+        }
+    }
+
+    &__text {
+        @include col-justify(center);
+        gap: 5px;
+
+
+        &--val {
+            font-weight: 700;
+            color: #282D30;
+        }
+
+        &--title {
+            font-size: 0.8rem;
+            color: #74798C;
+        }
+    }
+}

@@ -31,20 +31,36 @@
 
 #calories {
     grid-area: 1 / 4 / 2 / 5;
-    background-color: $light-gray;
+
+    .card__icon {
+        background-color: lighten($caloriesColor, 40%);
+        color: $caloriesColor;
+    }
 }
 
 #protein {
     grid-area: 2 / 4 / 3 / 5;
-    background-color: $light-gray;
+
+    .card__icon {
+        background-color: lighten($proteinColor, 30%);
+        color: $proteinColor;
+    }
 }
 
 #carb {
     grid-area: 3 / 4 / 4 / 5;
-    background-color: $light-gray;
+
+    .card__icon {
+        background-color: lighten($carbColor, 33%);
+        color: $carbColor;
+    }
 }
 
 #lipid {
     grid-area: 4 / 4 / 5 / 5;
-    background-color: $light-gray;
+
+    .card__icon {
+        background-color: lighten($lipidColor, 30%);
+        color: $lipidColor;
+    }
 }
