@@ -1,0 +1,38 @@
+#averageSessions {
+    @include col-justify(flex-end);
+    border-radius: 5px;
+    color: #fff;
+
+    .title {
+        position: relative;
+        top: 10%;
+        left: 10%;
+        width: 66%;
+
+        h3 {
+            font-size: 1.15rem;
+            font-weight: 500;
+            color: #fff;
+            opacity: 0.5;
+        }
+
+    }
+
+    .recharts-responsive-container {
+        position: relative
+    }
+
+    background-color: #FF0000;
+
+    .recharts-surface {
+        padding: 10px;
+    }
+
+    .custom-tooltip {
+        background-color: #fff;
+        padding: 10px;
+
+        color: #000;
+        font-size: 0.75rem;
+    }
+}

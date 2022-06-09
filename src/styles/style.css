@@ -188,6 +188,69 @@ main h1 .username {
   background-color: #FBFBFB;
 }
 
+#averageSessions {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  border-radius: 5px;
+  color: #fff;
+  background-color: #FF0000;
+}
+#averageSessions .title {
+  position: relative;
+  top: 10%;
+  left: 10%;
+  width: 66%;
+}
+#averageSessions .title h3 {
+  font-size: 1.15rem;
+  font-weight: 500;
+  color: #fff;
+  opacity: 0.5;
+}
+#averageSessions .recharts-responsive-container {
+  position: relative;
+}
+#averageSessions .recharts-surface {
+  padding: 10px;
+}
+#averageSessions .custom-tooltip {
+  background-color: #fff;
+  padding: 10px;
+  color: #000;
+  font-size: 0.75rem;
+}
+
+#dailyActivity {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  border-radius: 5px;
+  color: #fff;
+}
+#dailyActivity .title {
+  position: relative;
+  left: 5%;
+  top: 5%;
+}
+#dailyActivity .title h3 {
+  font-size: 1.15rem;
+  font-weight: 500;
+  color: #20253A;
+}
+#dailyActivity .custom-tooltip {
+  background-color: #E60000;
+  font-size: 0.75rem;
+}
+#dailyActivity .custom-tooltip p {
+  padding: 5px;
+  text-align: center;
+}
+#dailyActivity .recharts-legend-item-text {
+  color: #74798C !important;
+  font-size: 0.85rem;
+}
+
 #root {
   height: 100vh;
   width: 100vw;

@@ -1,5 +1,5 @@
-import React from "react"
-import {LineChart, Line, Tooltip, CartesianGrid, XAxis, YAxis} from "recharts"
+import React from "react";
+import { LineChart, Line, Tooltip, XAxis, ResponsiveContainer, CartesianGrid } from "recharts";
 // https://recharts.org/en-US/api/LineChart
 // const USER_AVERAGE_SESSIONS = [
 //     {
@@ -69,52 +69,64 @@ import {LineChart, Line, Tooltip, CartesianGrid, XAxis, YAxis} from "recharts"
 //         ]
 //     }
 // ]
-
+const DAYS = ["L", "M", "M", "J", "V", "S", "D"];
 const AverageSessions = () => {
 	const data = [
 		{
-			name: "L",
-			avg: 30,
-			label: "Foo",
+			day: 1,
+			sessionLength: 30,
 		},
 		{
-			name: "M",
-			avg: 40,
+			day: 2,
+			sessionLength: 23,
 		},
 		{
-			name: "M",
-			avg: 50,
+			day: 3,
+			sessionLength: 45,
 		},
 		{
-			name: "J",
-			avg: 30,
+			day: 4,
+			sessionLength: 50,
 		},
 		{
-			name: "V",
-			avg: 30,
+			day: 5,
+			sessionLength: 0,
 		},
 		{
-			name: "S",
-			avg: 50,
+			day: 6,
+			sessionLength: 10,
 		},
 		{
-			name: "D",
-			avg: 50,
+			day: 7,
+			sessionLength: 60,
 		},
-	]
+	];
+	// TODO : largeur de l'opacité des lignes restantes au hover ou opacité fixe ?
 	return (
 		<div id="averageSessions">
-            <LineChart width={600} height={300} margin={{ top: 5, right: 30, left: 20, bottom: 5 }}  data={data} style={{"background-color": "red;"}}>
-				<Line type="natural" dataKey="avg" stroke="#8884d8" strokeWidth="4" />
-				{/* <CartesianGrid stroke="#FF0000" fill="#FF0000" /> */}
-				{/* <XAxis dataKey="name" /> */}
-				<XAxis dataKey="name" />
-				{/* <YAxis /> */}
-				<Tooltip />
-                
-			</LineChart>
+			<div className="title">
+				<h3>Durée moyenne des sessions</h3>
+			</div>
+			<ResponsiveContainer width="100%" height="80%">
+				<LineChart data={data} stackOffset="silhouette">
+					<Line type="monotone" margin={{ top: 50, right: 20, bottom: 5, left: 0 }} overflow={150} aria-valuemax={500} dataKey="sessionLength" dot={false} stroke="#fff" strokeWidth="2" tickLine={false} />
+					<XAxis dataKey="day" stroke="#fff" tickLine={false} tickMargin={15} axisLine={false} tickFormatter={(dayNumber) => `${DAYS[dayNumber - 1]}`} />
+					<Tooltip content={<CustomTooltip />} cursor={false} />
+				</LineChart>
+			</ResponsiveContainer>
 		</div>
-	)
-}
+	);
+};
 
-export default AverageSessions
+export default AverageSessions;
+
+const CustomTooltip = ({ active, payload }) => {
+	if (active) {
+		const sessionLength = `${payload[0].payload.sessionLength} min`;
+		return (
+			<div className="custom-tooltip">
+				<p className="label">{sessionLength}</p>
+			</div>
+		);
+	}
+};
