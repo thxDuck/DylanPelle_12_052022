@@ -21,9 +21,6 @@ const user = {
 		lipidCount: 50,
 	},
 };
-// Todo : Créer le service qui va gérer les différents mots/unités
-//  TODO peut etre hard coder les imports et les passer en props
-// ../assets/images/icons/
 const dataByKey = {
 	calorieCount: {
 		name: "Calories",
@@ -52,17 +49,11 @@ const dataByKey = {
 };
 const UserInformations = () => {
 	const keyNames = Object.keys(dataByKey);
-	console.log("keyNames => ", keyNames);
 	return (
 		<>
 			{keyNames.map((key) => (
 				<Card key={key} id={dataByKey[key].id} title={dataByKey[key].name} icon={dataByKey[key].icon} unit={dataByKey[key].unit} value={user.keyData[key]} />
 			))}
-
-			{/* <Card value={user.keyData.calorieCount} title={dataByKey["calorieCount"]} icon="../assets/images/icons/logo.svg" /> */}
-			{/* <div id="protein">protein</div>
-			<div id="carb">carb</div>
-			<div id="lipid">lipid</div> */}
 		</>
 	);
 };

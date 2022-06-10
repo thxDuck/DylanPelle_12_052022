@@ -5,7 +5,7 @@ nav {
     .navbar-top {
         background-color: $dark;
         color: #fff;
-        height: 90px;
+        height: 5rem;
 
         .logo {
             @include row;
@@ -38,8 +38,8 @@ nav {
     .navbar-left {
         background-color: $dark;
         color: #fff;
-        height: calc(100% - 90px);
-        width: 110px;
+        height: calc(100% - 5rem);
+        width: 5.5rem;
         @include col-justify(space-evenly);
 
         &__activities {
@@ -48,6 +48,7 @@ nav {
             ul {
                 @include col-justify(center);
                 gap: 20px;
+                padding: 1rem;
             }
         }
 

@@ -61,7 +61,7 @@ nav {
 nav .navbar-top {
   background-color: #020203;
   color: #fff;
-  height: 90px;
+  height: 5rem;
   width: 100%;
   display: flex;
   flex-direction: row;
@@ -90,8 +90,8 @@ nav .navbar-top__pages ul {
 nav .navbar-left {
   background-color: #020203;
   color: #fff;
-  height: calc(100% - 90px);
-  width: 110px;
+  height: calc(100% - 5rem);
+  width: 5.5rem;
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
@@ -106,6 +106,7 @@ nav .navbar-left__activities ul {
   flex-direction: column;
   justify-content: center;
   gap: 20px;
+  padding: 1rem;
 }
 nav .navbar-left .copyright {
   font-size: 0.75rem;
@@ -121,9 +122,9 @@ nav li:hover {
 }
 
 main {
-  height: calc(100% - 90px);
-  width: calc(100% - 110px);
-  padding: 60px 100px;
+  height: calc(100% - 5rem);
+  width: calc(100% - 5.5rem);
+  padding: 2rem 2.5rem 2rem 3.7rem;
   position: absolute;
   bottom: 0;
   right: 0;
@@ -131,12 +132,20 @@ main {
   flex-direction: column;
   justify-content: space-between;
 }
-main h1 {
-  font-size: 3rem;
+
+header {
+  display: flex;
+  flex-direction: column;
+}
+header h1 {
+  font-size: 2.7rem;
   font-weight: 500;
 }
-main h1 .username {
+header h1 .username {
   color: #E60000;
+}
+header p {
+  margin: 1rem 0;
 }
 
 #dashboard {
@@ -214,8 +223,8 @@ main h1 .username {
   left: 10%;
   width: 66%;
 }
-#averageSessions .title h3 {
-  font-size: 1.15rem;
+#averageSessions .title p {
+  font-size: 1rem;
   font-weight: 500;
   color: #fff;
   opacity: 0.5;
@@ -245,8 +254,8 @@ main h1 .username {
   left: 5%;
   top: 5%;
 }
-#dailyActivity .title h3 {
-  font-size: 1.15rem;
+#dailyActivity .title p {
+  font-size: 1rem;
   font-weight: 500;
   color: #20253A;
 }
@@ -267,10 +276,14 @@ main h1 .username {
   background-color: #FBFBFB;
   display: flex;
   flex-direction: row;
+  justify-content: space-evenly;
   align-items: center;
-  gap: 1em;
-  padding-left: 20%;
   border-radius: 6px;
+}
+@media (max-width: 1200px) {
+  .card {
+    font-size: 0.9rem;
+  }
 }
 .card__icon {
   display: flex;
@@ -278,15 +291,19 @@ main h1 .username {
   justify-content: center;
   border-radius: 6px;
   padding: 1rem;
+  max-width: 60px;
+  max-height: 60px;
 }
 .card__icon img {
-  width: 20px;
+  width: auto;
 }
 .card__text {
   display: flex;
   flex-direction: column;
   justify-content: center;
   gap: 5px;
+  width: 25%;
+  height: 50%;
 }
 .card__text--val {
   font-weight: 700;

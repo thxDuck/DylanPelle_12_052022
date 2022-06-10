@@ -1,19 +1,23 @@
 main {
-    height: calc(100% - 90px);
-    width: calc(100% - 110px);
-    padding: 60px 100px;
+    height: calc(100% - 5rem);
+    width: calc(100% - 5.5rem);
+    // padding: 3rem 5rem;
+    // padding: 80px 30px 50px 66px;
+    padding: 2rem 2.5rem 2rem 3.7rem;
+
+
     position: absolute;
     bottom: 0;
     right: 0;
 
     @include col-justify(space-between);
 
-    h1 {
-        font-size: 3rem;
-        font-weight: 500;
 
-        .username {
-            color: $primary;
-        }
-    }
+
+    // @media (max-width: 1200px) {
+    //     height: calc(100% - 45px);
+    //     width: calc(100% - 75px);
+    //     padding: 80px 30px 50px 66px;
+
+    // }
 }

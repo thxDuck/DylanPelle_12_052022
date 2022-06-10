@@ -1,5 +1,4 @@
 import React from "react";
-import icon from "../assets/images/icons/calories.svg";
 const Card = (props) => {
 	const icon = props.icon;
 	const value = props.value;
