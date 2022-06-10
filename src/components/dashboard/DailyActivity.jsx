@@ -1,4 +1,5 @@
 import React from "react";
+import styled from "styled-components";
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from "recharts";
 const data = [
 	{
@@ -38,11 +39,19 @@ const data = [
 	},
 ];
 
+const Paragraph = styled.p`
+	font-size: 1rem;
+	font-weight: 500;
+	color: #20253a;
+`;
+
 const DailyActivity = () => {
+	// const dataMax = Math.max(...data.map((item) => item.kilogram)) + 2;
+	// const dataMin = Math.min(...data.map((item) => item.kilogram)) - 2;
 	return (
 		<div id="dailyActivity">
 			<div className="title">
-				<p>Activité quotidienne</p>
+				<Paragraph>Activité quotidienne</Paragraph>
 			</div>
 			<ResponsiveContainer width="100%" height="100%">
 				<BarChart
@@ -64,7 +73,7 @@ const DailyActivity = () => {
 						height={40}
 						payload={[
 							{ id: "legend-kg", value: "Poids (kg)", type: "circle", color: "#282D30" },
-							{ id: "uv", value: "Calories brûlées (kCal)", type: "circle", color: "#E60000" },
+							{ id: "legend-cal", value: "Calories brûlées (kCal)", type: "circle", color: "#E60000" },
 						]}
 					/>
 

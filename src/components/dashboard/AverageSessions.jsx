@@ -1,6 +1,5 @@
 import React from "react";
 import { LineChart, Line, Tooltip, XAxis, ResponsiveContainer } from "recharts";
-// https://recharts.org/en-US/api/LineChart
 const DAYS = ["L", "M", "M", "J", "V", "S", "D"];
 const AverageSessions = () => {
 	const data = [
@@ -44,8 +43,8 @@ const AverageSessions = () => {
 				</p>
 			</div>
 			<ResponsiveContainer width="100%" height="80%">
-				<LineChart data={data} stackOffset="silhouette">
-					<Line type="monotone" margin={{ top: 50, right: 20, bottom: 5, left: 0 }} overflow={150} aria-valuemax={500} dataKey="sessionLength" dot={false} stroke="#fff" strokeWidth="2" tickLine={false} />
+				<LineChart data={data}>
+					<Line type="monotone" margin={{ top: 50, right: 20, bottom: 5, left: 0 }} aria-valuemax={500} dataKey="sessionLength" dot={false} stroke="#fff" strokeWidth="2" tickLine={false} />
 					<XAxis dataKey="day" stroke="#fff" tickLine={false} tickMargin={15} axisLine={false} tickFormatter={(dayNumber) => `${DAYS[dayNumber - 1]}`} />
 					<Tooltip content={<CustomTooltip />} cursor={false} />
 				</LineChart>
@@ -55,6 +54,7 @@ const AverageSessions = () => {
 };
 
 export default AverageSessions;
+// TODO : Représenter le weekend en background
 
 const CustomTooltip = ({ active, payload }) => {
 	if (active) {

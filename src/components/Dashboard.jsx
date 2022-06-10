@@ -12,7 +12,7 @@ const Dashboard = () => {
 			<DailyActivity />
 			<AverageSessions />
 			<UserPerformence />
-			<UserObjective />
+			<UserObjective score="0.75" />
 			<UserInformations />
 		</section>
 	);
