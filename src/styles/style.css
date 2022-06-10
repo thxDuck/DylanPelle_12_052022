@@ -152,8 +152,8 @@ header p {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   grid-template-rows: repeat(4, 1fr);
-  grid-column-gap: 30px;
-  grid-row-gap: 30px;
+  grid-column-gap: 1rem;
+  grid-row-gap: 1rem;
   height: inherit;
 }
 
@@ -287,6 +287,12 @@ header p {
   font-size: 1.5rem;
   color: #282D30;
   margin-bottom: 0.6rem;
+}
+
+#userPerformence {
+  background-color: #282D30;
+  color: #fff;
+  border-radius: 5px;
 }
 
 .card {
