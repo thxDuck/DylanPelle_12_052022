@@ -54,8 +54,6 @@ for (let i = 0; i < USER_PERFORMANCE.data.length; i++) {
 	userData.label = categories[element];
 }
 const UserPerformences = () => {
-	// TODO : Margin in charts
-
 	return (
 		<div id="userPerformence">
 			<ResponsiveContainer width="100%" height="100%">
