@@ -3,15 +3,43 @@ const config = require('./config.json');
 const Services = {
 
     getUserInfo: async (userId, callback) => {
-        await fetch(`http://localhost:3000/user/${userId}`)
+        await fetch(`${config.baseUrl}/user/${userId}`)
             .then(response => response.json())
             .then(response => {
-                console.log(response);
                 callback(response.data)
                 return response.data;
             })
         .catch(error => console.log(error));
-    }
+    },
+    getDailyActivity: async (userId, callback) => {
+        await fetch(`${config.baseUrl}/user/${userId}/activity`)
+            .then(response => response.json())
+            .then(response => {
+                callback(response.data)
+                return response.data;
+            })
+        .catch(error => console.log(error));
+    },
+    getSessions: async (userId, callback) => {
+        await fetch(`${config.baseUrl}/user/${userId}/average-sessions`)
+            .then(response => response.json())
+            .then(response => {
+                callback(response.data)
+                return response.data;
+            })
+        .catch(error => console.log(error));
+    },
+    getPerformence: async (userId, callback) => {
+        console.log('here => ', userId);
+        
+        await fetch(`${config.baseUrl}/user/${userId}/performance`)
+            .then(response => response.json())
+            .then(response => {
+                callback(response.data)
+                return response.data;
+            })
+        .catch(error => console.log(error));
+    },
         
 
 

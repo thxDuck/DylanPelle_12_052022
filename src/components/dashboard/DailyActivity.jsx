@@ -1,54 +1,34 @@
-import React from "react";
-import styled from "styled-components";
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from "recharts";
-const data = [
-	{
-		day: "2020-07-01",
-		kilogram: 80,
-		calories: 240,
-	},
-	{
-		day: "2020-07-02",
-		kilogram: 80,
-		calories: 220,
-	},
-	{
-		day: "2020-07-03",
-		kilogram: 81,
-		calories: 280,
-	},
-	{
-		day: "2020-07-04",
-		kilogram: 81,
-		calories: 290,
-	},
-	{
-		day: "2020-07-05",
-		kilogram: 80,
-		calories: 160,
-	},
-	{
-		day: "2020-07-06",
-		kilogram: 78,
-		calories: 162,
-	},
-	{
-		day: "2020-07-07",
-		kilogram: 76,
-		calories: 390,
-	},
-];
+import React from "react"
+import { useState } from "react"
+import { useParams, useNavigate } from "react-router-dom"
+import styled from "styled-components"
+import Services from "../../services/services"
+import {BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer} from "recharts"
 
 const Paragraph = styled.p`
 	font-size: 1rem;
 	font-weight: 500;
 	color: #20253a;
-`;
+`
 
 const DailyActivity = () => {
-	// const dataMax = Math.max(...data.map((item) => item.kilogram)) + 2;
-	// const dataMin = Math.min(...data.map((item) => item.kilogram)) - 2;
-	return (
+	const navigate = useNavigate()
+	const params = useParams()
+	const userId = params.id
+
+	const [activities, setActivities] = useState(false)
+	const [isMounted, setIsMounted] = useState(false)
+	useState(() => {
+		!isMounted &&
+			Services.getDailyActivity(userId, (activity) => {
+				const sessions = activity.sessions
+				if (!sessions) navigate("/error");
+				setActivities(sessions);
+				setIsMounted(true)
+			})
+	}, [isMounted])
+
+	return !isMounted ? "" : (
 		<div id="dailyActivity">
 			<div className="title">
 				<Paragraph>Activité quotidienne</Paragraph>
@@ -57,14 +37,14 @@ const DailyActivity = () => {
 				<BarChart
 					width={500}
 					height={300}
-					data={data}
+					data={activities}
 					barSize={7}
 					margin={{
 						top: 5,
 						right: 30,
 						left: 20,
 						bottom: 15,
-					}}>
+					}} >
 					<Legend
 						verticalAlign="top"
 						align="right"
@@ -72,8 +52,8 @@ const DailyActivity = () => {
 						iconType="circle"
 						height={40}
 						payload={[
-							{ id: "legend-kg", value: "Poids (kg)", type: "circle", color: "#282D30" },
-							{ id: "legend-cal", value: "Calories brûlées (kCal)", type: "circle", color: "#E60000" },
+							{id: "legend-kg", value: "Poids (kg)", type: "circle", color: "#282D30"},
+							{id: "legend-cal", value: "Calories brûlées (kCal)", type: "circle", color: "#E60000"},
 						]}
 					/>
 
@@ -87,18 +67,18 @@ const DailyActivity = () => {
 				</BarChart>
 			</ResponsiveContainer>
 		</div>
-	);
-};
+	)
+}
 
-export default DailyActivity;
+export default DailyActivity
 
-const CustomTooltip = ({ label, active, payload }) => {
+const CustomTooltip = ({label, active, payload}) => {
 	if (active) {
 		return (
 			<div className="custom-tooltip">
 				<p>{`${payload[0].payload.kilogram}kg`}</p>
 				<p>{`${payload[0].payload.calories}Kcal`}</p>
 			</div>
-		);
+		)
 	}
-};
+}

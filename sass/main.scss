@@ -2,7 +2,11 @@
 @import "components";
 
 #root {
-  height: 100vh;
-  width: 100vw;
-  overflow: hidden;
+	height: 100vh;
+	width: 100vw;
+	overflow: hidden;
+}
+.error {
+	font-size: 2.7rem;
+	font-weight: 500;
 }

@@ -6,21 +6,6 @@ import proteinIcon from "../../assets/images/icons/protein.svg";
 import carbohydrateIcon from "../../assets/images/icons/carbohydrate.svg";
 import lipidIcon from "../../assets/images/icons/lipid.svg";
 
-const user = {
-	id: 12,
-	userInfos: {
-		firstName: "Karl",
-		lastName: "Dovineau",
-		age: 31,
-	},
-	todayScore: 0.12,
-	keyData: {
-		calorieCount: 1930,
-		proteinCount: 155,
-		carbohydrateCount: 290,
-		lipidCount: 50,
-	},
-};
 const dataByKey = {
 	calorieCount: {
 		name: "Calories",
@@ -47,12 +32,15 @@ const dataByKey = {
 		icon: lipidIcon,
 	},
 };
-const UserInformations = () => {
+const UserInformations = (props) => {
+	const userInformations = props.userInformations
+	// console.log('userInformations => ', userInformations);
+	
 	const keyNames = Object.keys(dataByKey);
 	return (
 		<>
 			{keyNames.map((key) => (
-				<Card key={key} id={dataByKey[key].id} title={dataByKey[key].name} icon={dataByKey[key].icon} unit={dataByKey[key].unit} value={user.keyData[key]} />
+				<Card key={key} id={dataByKey[key].id} title={dataByKey[key].name} icon={dataByKey[key].icon} unit={dataByKey[key].unit} value={userInformations[key]} />
 			))}
 		</>
 	);
