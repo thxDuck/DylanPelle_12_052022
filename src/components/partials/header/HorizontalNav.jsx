@@ -17,7 +17,7 @@ const HorizontalNav = () => {
 					</li>
 
 					<li>
-						<a href="/Réglages">Réglage</a>
+						<a href="/dashboard/0">Réglage</a>
 					</li>
 
 					<li>
