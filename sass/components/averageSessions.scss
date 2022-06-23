@@ -3,6 +3,12 @@
     border-radius: 5px;
     color: #fff;
 
+    background: linear-gradient(to right,
+            #FF0000 0%,
+            #FF0000 70%,
+            $darken-red 70%,
+            $darken-red 100%);
+
     .title {
         position: relative;
         top: 10%;
@@ -10,19 +16,16 @@
         width: 66%;
 
         p {
-            font-size: 1rem;
+            font-size: 0.9rem;
             font-weight: 500;
             color: #fff;
             opacity: 0.5;
         }
-
     }
 
     .recharts-responsive-container {
         position: relative
     }
-
-    background-color: #FF0000;
 
     .recharts-surface {
         padding: 10px;

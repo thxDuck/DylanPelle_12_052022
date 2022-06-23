@@ -1,11 +1,9 @@
 import React from "react";
 
-import zen from "../assets/images/icons/zen.svg";
-import swim from "../assets/images/icons/swim.svg";
-import cycling from "../assets/images/icons/cycling.svg";
-import strong from "../assets/images/icons/strong.svg";
-
-// TODO : Peut être une grosse grid?
+import zen from "../../../assets/images/icons/zen.svg";
+import swim from "../../../assets/images/icons/swim.svg";
+import cycling from "../../../assets/images/icons/cycling.svg";
+import strong from "../../../assets/images/icons/strong.svg";
 
 const VerticalNav = () => {
 	return (

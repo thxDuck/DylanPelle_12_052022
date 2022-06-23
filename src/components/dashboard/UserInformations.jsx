@@ -1,5 +1,5 @@
 import React from "react";
-import Card from "../Card.jsx";
+import Card from "../partials/Card.jsx";
 
 import caloriesIcon from "../../assets/images/icons/calories.svg";
 import proteinIcon from "../../assets/images/icons/protein.svg";
@@ -33,9 +33,8 @@ const dataByKey = {
 	},
 };
 const UserInformations = (props) => {
-	const userInformations = props.userInformations
-	// console.log('userInformations => ', userInformations);
-	
+	const userInformations = props.userInformations;
+
 	const keyNames = Object.keys(dataByKey);
 	return (
 		<>

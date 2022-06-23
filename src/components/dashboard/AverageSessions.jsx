@@ -1,9 +1,9 @@
-import React from "react"
-import { useState } from "react"
-import { useParams, useNavigate } from "react-router-dom"
-import {LineChart, Line, Tooltip, XAxis, ResponsiveContainer} from "recharts"
+import React from "react";
+import { useState } from "react";
+import { useParams, useNavigate } from "react-router-dom";
+import { LineChart, Line, Tooltip, XAxis, ResponsiveContainer } from "recharts";
 
-import Services from "../../services/services"
+import Services from "../../services/services";
 
 const DAYS = ["L", "M", "M", "J", "V", "S", "D"];
 
@@ -21,11 +21,12 @@ const AverageSessions = () => {
 				if (!averageSessions) navigate("/error");
 				setSessions(sessions);
 				setIsMounted(true);
-			})
+			});
 	}, [isMounted]);
 
-
-	return !isMounted ? "" : (
+	return !isMounted ? (
+		""
+	) : (
 		<div id="averageSessions">
 			<div className="title">
 				<p>
@@ -36,26 +37,27 @@ const AverageSessions = () => {
 			</div>
 			<ResponsiveContainer width="100%" height="80%">
 				<LineChart data={sessions}>
-					<Line type="monotone" margin={{top: 50, right: 20, bottom: 5, left: 0}} aria-valuemax={500} dataKey="sessionLength" dot={false} stroke="#fff" strokeWidth="2" tickLine={false} />
+					<Line strokeDashArray="4 1 2" type="monotone" margin={{ top: 50, right: 20, bottom: 5, left: 0 }} aria-valuemax={500} dataKey="sessionLength" dot={false} stroke="#fff" strokeWidth="2" tickLine={false} />
 					<XAxis dataKey="day" stroke="#fff" tickLine={false} tickMargin={15} axisLine={false} tickFormatter={(dayNumber) => `${DAYS[dayNumber - 1]}`} />
 					<Tooltip content={<CustomTooltip />} cursor={false} />
 				</LineChart>
 			</ResponsiveContainer>
+			{/* <div className="weekend"></div> */}
 		</div>
-	)
-}
+	);
+};
 
 // TODO : Représenter le weekend en background
 
-const CustomTooltip = ({active, payload}) => {
+const CustomTooltip = ({ active, payload }) => {
 	if (active) {
-		const sessionLength = `${payload[0].payload.sessionLength} min`
+		const sessionLength = `${payload[0].payload.sessionLength} min`;
 		return (
 			<div className="custom-tooltip">
 				<p className="label">{sessionLength}</p>
 			</div>
-		)
+		);
 	}
-}
+};
 
-export default AverageSessions
+export default AverageSessions;
