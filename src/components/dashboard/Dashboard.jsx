@@ -11,10 +11,14 @@ const Dashboard = (props) => {
 	const userInformations = props.userInformations;
 	return (
 		<section id="dashboard">
-			<DailyActivity />
-			<AverageSessions />
-			<UserPerformence />
-			<UserObjective score={score} />
+			<div className="container">
+				<DailyActivity />
+				<div className="bottom-row">
+					<AverageSessions />
+					<UserPerformence />
+					<UserObjective score={score} />
+				</div>
+			</div>
 			<UserInformations userInformations={userInformations} />
 		</section>
 	);

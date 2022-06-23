@@ -1,6 +1,8 @@
 .card {
     background-color: $light-gray;
-    @include row-justify(space-evenly);
+    @include row;
+    padding-left: 20%;
+    gap: 1rem;
     align-items: center;
     border-radius: 6px;
 
@@ -28,7 +30,6 @@
 
         width: 25%;
         height: 50%;
-
 
         &--val {
             font-weight: 700;

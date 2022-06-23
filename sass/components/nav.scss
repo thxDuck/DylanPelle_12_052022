@@ -1,5 +1,4 @@
 nav {
-
     height: 100%;
 
     .navbar-top {
@@ -26,10 +25,8 @@ nav {
             ul {
                 width: 100%;
                 @include row-justify(space-around);
-                font-size: 1.5rem;
                 padding: 30px 0px;
-
-
+                font-size: 1.5rem;
             }
         }
 
@@ -47,8 +44,8 @@ nav {
 
             ul {
                 @include col-justify(center);
-                gap: 20px;
                 padding: 1rem;
+                gap: 20px;
             }
         }
 

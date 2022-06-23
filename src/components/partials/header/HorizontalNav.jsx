@@ -1,6 +1,5 @@
 import React from "react";
 import Logo from "../../../assets/images/icons/logo.svg";
-import { Link } from "react-router-dom";
 const HorizontalNav = () => {
 	return (
 		<div className="navbar-top">
@@ -10,7 +9,7 @@ const HorizontalNav = () => {
 			<div className="navbar-top__pages">
 				<ul>
 					<li>
-						<Link to="/dashboard/12">Accueil</Link>
+						<a href="/dashboard/12">Accueil</a>
 					</li>
 
 					<li>

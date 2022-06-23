@@ -1,5 +1,11 @@
 #userPerformence {
     background-color: #282D30;
-    color: #fff;
     border-radius: 5px;
+
+    color: #fff;
+    font-size: 0.7rem;
+
+    @media (min-width: 1200px) {
+        font-size: 0.9rem;
+    }
 }

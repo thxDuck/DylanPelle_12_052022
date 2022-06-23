@@ -41,9 +41,9 @@ const UserPerformences = () => {
 	) : (
 		<div id="userPerformence">
 			<ResponsiveContainer width="100%" height="100%">
-				<RadarChart outerRadius={66} data={performences.data} padding={{ top: 10, right: 30, left: 0, bottom: 0 }}>
+				<RadarChart outerRadius="60%" data={performences.data} margin={{ top: 0, right: 30, left: 30, bottom: 0 }}>
 					<PolarGrid radialLines={false} />
-					<PolarAngleAxis axisLine={true} tickCount={4} fontSize="0.7rem" dataKey="label" stroke="#fff" tickLine={false} />
+					<PolarAngleAxis axisLine={true} tickCount={4} dataKey="label" stroke="#fff" tickLine={false} />
 					{categoriesNames.map((name, i) => (
 						<Radar key={i} name={categories[name]} dataKey="value" fill="#FF0101" fillOpacity={0.2} />
 					))}

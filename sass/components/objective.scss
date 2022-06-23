@@ -1,5 +1,23 @@
 #userObjective {
+    background-color: $light-gray;
+
     @include col-align(center);
+    border-radius: 5px;
+
+    .title {
+        align-self: flex-start;
+        position: absolute;
+        height: 0;
+
+        p {
+            margin-left: 1.5rem;
+            margin-top: 1rem;
+
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: #20253A;
+        }
+    }
 
 
     .label-objective {

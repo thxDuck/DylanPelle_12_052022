@@ -42,12 +42,9 @@ const AverageSessions = () => {
 					<Tooltip content={<CustomTooltip />} cursor={false} />
 				</LineChart>
 			</ResponsiveContainer>
-			{/* <div className="weekend"></div> */}
 		</div>
 	);
 };
-
-// TODO : Représenter le weekend en background
 
 const CustomTooltip = ({ active, payload }) => {
 	if (active) {

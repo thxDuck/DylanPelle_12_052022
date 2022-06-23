@@ -1,4 +1,5 @@
 import React from "react";
+
 const Card = (props) => {
 	const icon = props.icon;
 	const value = props.value;

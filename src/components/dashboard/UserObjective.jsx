@@ -11,9 +11,12 @@ const UserObjective = (props) => {
 	];
 	return (
 		<div id="userObjective">
+			<div className="title">
+				<p>Score</p>
+			</div>
 			<ResponsiveContainer width="100%" height="100%">
 				<PieChart>
-					<Pie data={data} isAnimationActive={true} cx="50%" cy="50%" endAngle={450} startAngle={90} autoReverse={true} innerRadius="75%" outerRadius="85%" fill="#8884d8" dataKey="value">
+					<Pie alignmentBaseline="center" data={data} isAnimationActive={true} cx="50%" cy="50%" endAngle={450} startAngle={90} autoReverse={true} innerRadius="75%" outerRadius="85%" fill="#8884d8" dataKey="value">
 						{data.map((entry, index) => (
 							<Cell key={`cell-${index}`} fill={entry.fill} />
 						))}

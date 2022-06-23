@@ -37,11 +37,11 @@ const UserInformations = (props) => {
 
 	const keyNames = Object.keys(dataByKey);
 	return (
-		<>
+		<div className="informationCards">
 			{keyNames.map((key) => (
 				<Card key={key} id={dataByKey[key].id} title={dataByKey[key].name} icon={dataByKey[key].icon} unit={dataByKey[key].unit} value={userInformations[key]} />
 			))}
-		</>
+		</div>
 	);
 };
 
