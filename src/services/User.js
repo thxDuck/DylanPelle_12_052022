@@ -83,25 +83,3 @@ export default class User {
         return performencesData;
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

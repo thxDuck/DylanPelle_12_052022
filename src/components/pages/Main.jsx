@@ -4,13 +4,13 @@ import { useParams } from "react-router-dom";
 import Header from "../partials/header/Header";
 import Dashboard from "../dashboard/Dashboard";
 
+import mocks from "../../services/mocks.js";
 import User from "../../services/User";
-import Mocks from "../../services/Mocks.js";
 
 const Main = () => {
 	const params = useParams();
 	const userId = params.id;
-	const [user, setUser] = useState(Mocks.userInformation);
+	const [user, setUser] = useState(mocks.userInformation);
 
 	useEffect(() => {
 		const getData = async (user) => {
@@ -20,7 +20,7 @@ const Main = () => {
 				p.textContent = data.message;
 				document.querySelector("#modal .content").appendChild(p);
 				document.getElementById("modal").style.display = "flex";
-				setUser(Mocks.userInformation);
+				setUser(mocks.userInformation);
 			} else {
 				setUser(data);
 			}

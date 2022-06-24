@@ -1,13 +1,12 @@
 import { Routes, Route } from "react-router-dom";
 import Main from "../components/pages/Main";
-import Error from "../components/pages/Error";
+import SelectUser from "../components/pages/SelectUser";
 
 function RoutesApp() {
 	return (
 		<Routes>
-			<Route path="/dashboard/:id" element={<Main />} />
-			<Route index={true} path="/" element={<Main />} />
-			<Route path="/error" element={<Error />} />
+			<Route path="/:id" element={<Main />} />
+			<Route index={true} path="/" element={<SelectUser />} />
 		</Routes>
 	);
 }

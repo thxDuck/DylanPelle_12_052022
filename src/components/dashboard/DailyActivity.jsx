@@ -4,7 +4,7 @@ import styled from "styled-components";
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from "recharts";
 
 import User from "../../services/User";
-import Mocks from "../../services/Mocks.js";
+import mocks from "../../services/mocks.js";
 
 const Paragraph = styled.p`
 	font-size: 1rem;
@@ -15,7 +15,7 @@ const Paragraph = styled.p`
 const DailyActivity = () => {
 	const params = useParams();
 	const userId = params.id;
-	const [activities, setActivities] = useState(Mocks.activities);
+	const [activities, setActivities] = useState(mocks.activities);
 
 	useEffect(() => {
 		const getActivities = async (user) => {
@@ -25,7 +25,7 @@ const DailyActivity = () => {
 				p.textContent = activitiesData.message;
 				document.querySelector("#modal .content").appendChild(p);
 				document.getElementById("modal").style.display = "flex";
-				setActivities(Mocks.userInformation);
+				setActivities(mocks.activities);
 			} else {
 				setActivities(activitiesData);
 			}
@@ -41,6 +41,7 @@ const DailyActivity = () => {
 			<div className="title">
 				<Paragraph>Activité quotidienne</Paragraph>
 			</div>
+			{console.log("activities => ", activities)}
 			<ResponsiveContainer width="100%" height="100%">
 				<BarChart
 					width={500}
@@ -81,7 +82,7 @@ const DailyActivity = () => {
 export default DailyActivity;
 
 const CustomTooltip = ({ label, active, payload }) => {
-	if (active) {
+	if (active && payload?.length > 0) {
 		return (
 			<div className="custom-tooltip">
 				<p>{`${payload[0].payload.kilogram || 0}kg`}</p>

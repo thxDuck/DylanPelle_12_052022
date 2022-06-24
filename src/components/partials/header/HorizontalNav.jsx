@@ -9,19 +9,19 @@ const HorizontalNav = () => {
 			<div className="navbar-top__pages">
 				<ul>
 					<li>
-						<a href="/dashboard/12">Accueil</a>
+						<a href="/">Accueil</a>
 					</li>
 
 					<li>
-						<a href="/dashboard/18">Profil</a>
+						<a href="/12">Profil</a>
 					</li>
 
 					<li>
-						<a href="/dashboard/0">Réglage</a>
+						<a href="/18">Réglage</a>
 					</li>
 
 					<li>
-						<a href="/Communauté">Communauté</a>
+						<a href="/">Communauté</a>
 					</li>
 				</ul>
 			</div>

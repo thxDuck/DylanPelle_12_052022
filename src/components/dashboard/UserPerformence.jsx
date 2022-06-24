@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import { ResponsiveContainer, RadarChart, PolarGrid, PolarAngleAxis, Radar } from "recharts";
 
 import User from "../../services/User";
-import Mocks from "../../services/Mocks";
+import mocks from "../../services/mocks";
 
 const categories = {
 	intensity: "Intensité",
@@ -24,13 +24,12 @@ const UserPerformences = () => {
 	useEffect(() => {
 		const getData = async (user) => {
 			const data = await user.getPerformence();
-			console.log("data => ", data);
 			if (!!data.error) {
 				const p = document.createElement("p");
 				p.textContent = data.message;
 				document.querySelector("#modal .content").appendChild(p);
 				document.getElementById("modal").style.display = "flex";
-				setPerformences(Mocks.performences);
+				setPerformences(mocks.performences);
 			} else {
 				setPerformences(data);
 			}

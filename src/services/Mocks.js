@@ -1,4 +1,4 @@
-const Mocks = {
+const mocks = {
     userInformation: {
         mock: true,
         firstName: "",
@@ -12,17 +12,16 @@ const Mocks = {
             proteinCount: 0,
         },
     },
-    activities: {
-        sessions: [
-            { day: "2020-01-01", kilogram: 0, calories: 0 },
-            { day: "2020-01-02", kilogram: 0, calories: 0 },
-            { day: "2020-01-03", kilogram: 0, calories: 0 },
-            { day: "2020-01-04", kilogram: 0, calories: 0 },
-            { day: "2020-01-05", kilogram: 0, calories: 0 },
-            { day: "2020-01-06", kilogram: 0, calories: 0 },
-            { day: "2020-01-07", kilogram: 0, calories: 0 },
-        ]
-    },
+    activities: [
+        { day: 1, kilogram: 0, calories: 0 },
+        { day: 2, kilogram: 0, calories: 0 },
+        { day: 3, kilogram: 0, calories: 0 },
+        { day: 4, kilogram: 0, calories: 0 },
+        { day: 5, kilogram: 0, calories: 0 },
+        { day: 6, kilogram: 0, calories: 0 },
+        { day: 7, kilogram: 0, calories: 0 },
+    ],
+
     averageSessions: [
         { day: "L", sessionLength: 0 },
         { day: "M", sessionLength: 0 },
@@ -52,4 +51,4 @@ const Mocks = {
     }
 }
 
-export default Mocks;
+export default mocks;

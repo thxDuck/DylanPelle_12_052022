@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import { LineChart, Line, Tooltip, XAxis, ResponsiveContainer } from "recharts";
 
 import User from "../../services/User";
-import Mocks from "../../services/Mocks.js";
+import mocks from "../../services/mocks.js";
 
 const AverageSessions = () => {
 	const params = useParams();
@@ -18,12 +18,12 @@ const AverageSessions = () => {
 				p.textContent = data.message;
 				document.querySelector("#modal .content").appendChild(p);
 				document.getElementById("modal").style.display = "flex";
-				setSessions(Mocks.averageSessions);
+				setSessions(mocks.averageSessions);
 			} else {
 				setSessions(data);
 			}
 		};
-		const user = new User("userId");
+		const user = new User(userId);
 		getData(user);
 	}, [userId]);
 
