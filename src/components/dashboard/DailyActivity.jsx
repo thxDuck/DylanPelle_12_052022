@@ -1,34 +1,42 @@
-import React from "react"
-import { useState } from "react"
-import { useParams, useNavigate } from "react-router-dom"
-import styled from "styled-components"
-import Services from "../../services/services"
-import {BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer} from "recharts"
+import React, { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
+import styled from "styled-components";
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from "recharts";
+
+import User from "../../services/User";
+import Mocks from "../../services/Mocks.js";
 
 const Paragraph = styled.p`
 	font-size: 1rem;
 	font-weight: 500;
 	color: #20253a;
-`
+`;
 
 const DailyActivity = () => {
-	const navigate = useNavigate()
-	const params = useParams()
-	const userId = params.id
+	const params = useParams();
+	const userId = params.id;
+	const [activities, setActivities] = useState(Mocks.activities);
 
-	const [activities, setActivities] = useState(false)
-	const [isMounted, setIsMounted] = useState(false)
-	useState(() => {
-		!isMounted &&
-			Services.getDailyActivity(userId, (activity) => {
-				const sessions = activity.sessions
-				if (!sessions) navigate("/error");
-				setActivities(sessions);
-				setIsMounted(true)
-			})
-	}, [isMounted])
+	useEffect(() => {
+		const getActivities = async (user) => {
+			const activitiesData = await user.getActivities();
+			if (!!activitiesData.error) {
+				const p = document.createElement("p");
+				p.textContent = activitiesData.message;
+				document.querySelector("#modal .content").appendChild(p);
+				document.getElementById("modal").style.display = "flex";
+				setActivities(Mocks.userInformation);
+			} else {
+				setActivities(activitiesData);
+			}
+		};
+		const user = new User(userId);
+		getActivities(user);
+	}, [userId]);
 
-	return !isMounted ? "" : (
+	return !activities ? (
+		""
+	) : (
 		<div id="dailyActivity">
 			<div className="title">
 				<Paragraph>Activité quotidienne</Paragraph>
@@ -44,7 +52,7 @@ const DailyActivity = () => {
 						right: 30,
 						left: 20,
 						bottom: 15,
-					}} >
+					}}>
 					<Legend
 						verticalAlign="top"
 						align="right"
@@ -52,12 +60,12 @@ const DailyActivity = () => {
 						iconType="circle"
 						height={40}
 						payload={[
-							{id: "legend-kg", value: "Poids (kg)", type: "circle", color: "#282D30"},
-							{id: "legend-cal", value: "Calories brûlées (kCal)", type: "circle", color: "#E60000"},
+							{ id: "legend-kg", value: "Poids (kg)", type: "circle", color: "#282D30" },
+							{ id: "legend-cal", value: "Calories brûlées (kCal)", type: "circle", color: "#E60000" },
 						]}
 					/>
 
-					<XAxis dataKey="day" tickFormatter={(date) => `${new Date(date).getDate()}`} tickMargin="15" />
+					<XAxis dataKey="day" tickMargin="15" />
 					<YAxis yAxisId="right" orientation="right" tickLine={false} axisLine={true} type="number" domain={["dataMin - 2", "dataMax + 2"]} tickCount="4" />
 					<YAxis yAxisId="left" orientation="left" hide={true} />
 					<CartesianGrid vertical={false} />
@@ -67,18 +75,18 @@ const DailyActivity = () => {
 				</BarChart>
 			</ResponsiveContainer>
 		</div>
-	)
-}
+	);
+};
 
-export default DailyActivity
+export default DailyActivity;
 
-const CustomTooltip = ({label, active, payload}) => {
+const CustomTooltip = ({ label, active, payload }) => {
 	if (active) {
 		return (
 			<div className="custom-tooltip">
-				<p>{`${payload[0].payload.kilogram}kg`}</p>
-				<p>{`${payload[0].payload.calories}Kcal`}</p>
+				<p>{`${payload[0].payload.kilogram || 0}kg`}</p>
+				<p>{`${payload[0].payload.calories || 0}Kcal`}</p>
 			</div>
-		)
+		);
 	}
-}
+};

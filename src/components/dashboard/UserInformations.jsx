@@ -34,7 +34,6 @@ const dataByKey = {
 };
 const UserInformations = (props) => {
 	const userInformations = props.userInformations;
-
 	const keyNames = Object.keys(dataByKey);
 	return (
 		<div className="informationCards">

@@ -6,6 +6,7 @@ function RoutesApp() {
 	return (
 		<Routes>
 			<Route path="/dashboard/:id" element={<Main />} />
+			<Route index={true} path="/" element={<Main />} />
 			<Route path="/error" element={<Error />} />
 		</Routes>
 	);

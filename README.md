@@ -26,3 +26,11 @@ You can run the api with docker. Steps are described in the [readme.md](https://
 -   `npm install` in repository will install all dependences
 -   The `npm start` command run the app in the development mode.
 -   Open [http://localhost:3300](http://localhost:3300) to view it in your browser.
+
+<!--
+    - reste a passer en useEffects
+    - api séparé
+    - Jsdoc
+    - mock data
+    - Proptypes
+ -->

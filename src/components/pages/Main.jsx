@@ -1,41 +1,40 @@
-import React from "react";
-import { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
+
 import Header from "../partials/header/Header";
 import Dashboard from "../dashboard/Dashboard";
-import Services from "../../services/services";
-import { useParams, useNavigate } from "react-router-dom";
-const mockedUser = {
-	keyData: [],
-	todayScore: 0,
-	userInfos: {
-		age: 0,
-		firstName: "",
-		lastName: "",
-	},
-};
+
+import User from "../../services/User";
+import Mocks from "../../services/Mocks.js";
 
 const Main = () => {
-	const navigate = useNavigate();
 	const params = useParams();
 	const userId = params.id;
-	const [user, setUser] = useState(mockedUser);
-	const [isMounted, setIsMounted] = useState(false);
-	useState(() => {
-		!isMounted &&
-			!!userId &&
-			Services.getUserInfo(userId, (user) => {
-				if (!user) navigate("/error");
-				setUser(user);
-				setIsMounted(true);
-			});
-	}, [isMounted, user]);
+	const [user, setUser] = useState(Mocks.userInformation);
 
-	return !isMounted ? (
+	useEffect(() => {
+		const getData = async (user) => {
+			const data = await user.getInformations();
+			if (!!data.error) {
+				const p = document.createElement("p");
+				p.textContent = data.message;
+				document.querySelector("#modal .content").appendChild(p);
+				document.getElementById("modal").style.display = "flex";
+				setUser(Mocks.userInformation);
+			} else {
+				setUser(data);
+			}
+		};
+		const user = new User(userId);
+		getData(user);
+	}, [userId]);
+
+	return !user ? (
 		""
 	) : (
 		<main>
-			<Header name={user.userInfos.firstName} />
-			<Dashboard userId={userId} score={user.score ? user.score : user.todayScore} userInformations={user.keyData} />
+			<Header name={user.firstName} />
+			{!user.mock ? <Dashboard userId={userId} score={user.score} userInformations={user.keyData} /> : <></>}
 		</main>
 	);
 };

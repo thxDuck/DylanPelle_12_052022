@@ -1,9 +1,9 @@
-import React from "react";
-import { useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
 import { ResponsiveContainer, RadarChart, PolarGrid, PolarAngleAxis, Radar } from "recharts";
 
-import Services from "../../services/services";
+import User from "../../services/User";
+import Mocks from "../../services/Mocks";
 
 const categories = {
 	intensity: "Intensité",
@@ -14,38 +14,42 @@ const categories = {
 	cardio: "Cardio",
 };
 const UserPerformences = () => {
-	const navigate = useNavigate();
 	const categoriesNames = Object.keys(categories);
 	const params = useParams();
 	const userId = params.id;
 
+	// cette variable alimente le graph
 	const [performences, setPerformences] = useState(false);
-	const [isMounted, setIsMounted] = useState(false);
 
-	useState(() => {
-		!isMounted &&
-			Services.getPerformence(userId, (userPerformence) => {
-				if (!userPerformence) navigate("/error/");
-				for (let i = 0; i < userPerformence.data.length; i++) {
-					const userData = userPerformence.data[i];
-					const element = userPerformence.kind[userData.kind];
-					userData.label = categories[element];
-				}
-				setPerformences(userPerformence);
-				setIsMounted(true);
-			});
-	}, [isMounted]);
+	useEffect(() => {
+		const getData = async (user) => {
+			const data = await user.getPerformence();
+			console.log("data => ", data);
+			if (!!data.error) {
+				const p = document.createElement("p");
+				p.textContent = data.message;
+				document.querySelector("#modal .content").appendChild(p);
+				document.getElementById("modal").style.display = "flex";
+				setPerformences(Mocks.performences);
+			} else {
+				setPerformences(data);
+			}
+		};
+		const user = new User(userId);
+		getData(user);
+	}, [userId]);
 
-	return !isMounted ? (
+	return !performences ? (
 		""
 	) : (
 		<div id="userPerformence">
 			<ResponsiveContainer width="100%" height="100%">
-				<RadarChart outerRadius="60%" data={performences.data} margin={{ top: 0, right: 30, left: 30, bottom: 0 }}>
+				<RadarChart outerRadius="100%" data={performences.data} margin={{ top: 0, right: 30, left: 30, bottom: 0 }}>
 					<PolarGrid radialLines={false} />
 					<PolarAngleAxis axisLine={true} tickCount={4} dataKey="label" stroke="#fff" tickLine={false} />
 					{categoriesNames.map((name, i) => (
-						<Radar key={i} name={categories[name]} dataKey="value" fill="#FF0101" fillOpacity={0.2} />
+						// TODO : Voir l'odre !
+						<Radar key={i} name={categories[name]} order={i} dataKey="value" fill="#FF0101" fillOpacity={0.2} />
 					))}
 				</RadarChart>
 			</ResponsiveContainer>

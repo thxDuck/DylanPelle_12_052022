@@ -1,6 +1,7 @@
 import React from "react";
 
 const Error = () => {
+	// TODO : Metre un code erreur
 	return (
 		<main>
 			<p

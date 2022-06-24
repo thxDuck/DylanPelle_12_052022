@@ -1,5 +1,5 @@
+import Modal from "../components/partials/Modal";
 import Nav from "../components/partials/header/Nav";
-import Main from "../components/pages/Main";
 
 import "../styles/style.css";
 import RoutesApp from "./Routes";
@@ -11,7 +11,7 @@ const App = () => {
 		<BrowserRouter>
 			<RoutesApp />
 			<Nav />
-			<Main />
+			<Modal />
 		</BrowserRouter>
 	);
 };
