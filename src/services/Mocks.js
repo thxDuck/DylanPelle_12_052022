@@ -31,24 +31,14 @@ const mocks = {
         { day: "S", sessionLength: 0 },
         { day: "D", sessionLength: 0 },
     ],
-    performences: {
-        data: [
-            { value: 0, kind: 1, label: "Cardio" },
-            { value: 0, kind: 2, label: "Energie" },
-            { value: 0, kind: 3, label: "Endurance" },
-            { value: 0, kind: 4, label: "Force" },
-            { value: 0, kind: 5, label: "Vitesse" },
-            { value: 0, kind: 6, label: "Intensité" },
-        ],
-        kind: {
-            1: "cardio",
-            2: "energy",
-            3: "endurance",
-            4: "strength",
-            5: "speed",
-            6: "intensity",
-        },
-    }
+    performences: [
+        { value: 0, kind: 6, label: "Intensité" },
+        { value: 0, kind: 5, label: "Vitesse" },
+        { value: 0, kind: 4, label: "Force" },
+        { value: 0, kind: 3, label: "Endurance" },
+        { value: 0, kind: 2, label: "Energie" },
+        { value: 0, kind: 1, label: "Cardio" },
+    ],
 }
 
 export default mocks;

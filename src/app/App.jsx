@@ -7,13 +7,13 @@ import RoutesApp from "./Routes";
 import { BrowserRouter } from "react-router-dom";
 
 const App = () => {
-	return (
-		<BrowserRouter>
-			<RoutesApp />
-			<Nav />
-			<Modal />
-		</BrowserRouter>
-	);
+    return (
+        <BrowserRouter>
+            <Nav />
+            <RoutesApp />
+            <Modal />
+        </BrowserRouter>
+    );
 };
 
 export default App;

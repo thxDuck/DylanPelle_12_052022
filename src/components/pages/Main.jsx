@@ -1,42 +1,60 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
+import PropTypes from "prop-types";
 
 import Header from "../partials/header/Header";
 import Dashboard from "../dashboard/Dashboard";
 
-import mocks from "../../services/mocks.js";
+import utils from "../../services/utils.js";
 import User from "../../services/User";
 
 const Main = () => {
-	const params = useParams();
-	const userId = params.id;
-	const [user, setUser] = useState(mocks.userInformation);
+    const params = useParams();
+    const userId = params.id;
+    // user contains the user informations. If user not found, an error will be displayed and page gender with mocked data.
+    const [user, setUser] = useState(utils.mocks.userInformation);
 
-	useEffect(() => {
-		const getData = async (user) => {
-			const data = await user.getInformations();
-			if (!!data.error) {
-				const p = document.createElement("p");
-				p.textContent = data.message;
-				document.querySelector("#modal .content").appendChild(p);
-				document.getElementById("modal").style.display = "flex";
-				setUser(mocks.userInformation);
-			} else {
-				setUser(data);
-			}
-		};
-		const user = new User(userId);
-		getData(user);
-	}, [userId]);
+    // set monted true when we receive a response from the api
+    const [mounted, setMounted] = useState(false);
 
-	return !user ? (
-		""
-	) : (
-		<main>
-			<Header name={user.firstName} />
-			{!user.mock ? <Dashboard userId={userId} score={user.score} userInformations={user.keyData} /> : <></>}
-		</main>
-	);
+    useEffect(() => {
+        const getData = async (user) => {
+            const data = await user.getInformations();
+            setMounted(true);
+            if (!!data.error) {
+                utils.displayMessageInModal(data.message, true);
+                setUser(utils.mocks.userInformation);
+            } else {
+                setUser(data);
+            }
+
+            // const displayMessageInModal = (message, emptyFirst = false) => {
+            //     const modal = document.getElementById("modal");
+            //     const modalContent = modal.firstChild;
+
+            //     if (emptyFirst) modalContent.innerHTML = "";
+            //     const p = document.createElement("p");
+            //     p.textContent = message;
+            //     modalContent.appendChild(p);
+            //     modal.style.display = "flex";
+            // };
+        };
+        const user = new User(userId);
+        getData(user);
+    }, [userId]);
+    console.log(user);
+    return !user ? (
+        ""
+    ) : (
+        <main>
+            {mounted ? <Header name={user.firstName} mock={user.mock} /> : ""}
+            {!user.mock ? <Dashboard userId={userId} score={user.score} userInformations={user.keyData} /> : ""}
+        </main>
+    );
 };
-
+Main.propTypes = {
+    userId: PropTypes.number,
+    score: PropTypes.number,
+    userInformations: PropTypes.number,
+};
 export default Main;

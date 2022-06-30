@@ -15,6 +15,7 @@ export default class User {
         const user = await userApi.get.informations(this.userId);
         if (!user) {
             this.error.message = "Ce profil n'a pas été trouvé.";
+            this.error.message = "Ce profil n'a pas été trouvé.";
             return this.error;
         }
         const userInfos = user.userInfos;
@@ -73,13 +74,17 @@ export default class User {
             this.error.message = "Performence non trouvées.";
             return this.error;
         }
-
-        for (let i = 0; i < performencesData.data.length; i++) {
-            const userData = performencesData.data[i];
-            const element = performencesData.kind[userData.kind];
-            userData.label = CATEGORIES[element];
+        const categoriesNames = Object.keys(CATEGORIES);
+        const kindDataArray = Object.values(performencesData.kind)
+        const orderedPerformences = []
+        for (let i = 0; i < categoriesNames.length; i++) {
+            const cat = categoriesNames[i];
+            const kindIndex = kindDataArray.findIndex(value => value === cat);
+            const userData = performencesData.data.find(d => d.kind === kindIndex + 1);
+            userData.label = CATEGORIES[cat];
+            orderedPerformences.push(userData);
         }
-
-        return performencesData;
+        console.log('orderedPerformences => ', orderedPerformences);
+        return orderedPerformences;
     }
 }

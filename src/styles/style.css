@@ -131,6 +131,15 @@ main {
   display: flex;
   flex-direction: column;
 }
+main.error {
+  font-size: 2.5rem;
+  font-weight: 500;
+}
+main.error small {
+  font-size: 0.8rem;
+  margin-left: 15px;
+  color: #6f6f6f;
+}
 
 header {
   display: flex;
