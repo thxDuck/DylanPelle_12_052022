@@ -1,21 +1,30 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 const Card = (props) => {
-	const icon = props.icon;
-	const value = props.value;
-	const title = props.title;
-	const unit = props.unit;
-	const id = props.id;
-	return (
-		<div className="card" id={id}>
-			<div className="card__icon">
-				<img src={icon} alt="" />
-			</div>
-			<div className="card__text">
-				<p className="card__text--val">{`${value}${unit}`}</p>
-				<p className="card__text--title">{title}</p>
-			</div>
-		</div>
-	);
+    const icon = props.icon;
+    const value = props.value;
+    const title = props.title;
+    const unit = props.unit;
+    const id = props.id;
+
+    return (
+        <div className="card" id={id}>
+            <div className="card__icon">
+                <img src={icon} alt="" />
+            </div>
+            <div className="card__text">
+                <p className="card__text--val">{`${value}${unit}`}</p>
+                <p className="card__text--title">{title}</p>
+            </div>
+        </div>
+    );
+};
+Card.propTypes = {
+    icon: PropTypes.string.isRequired,
+    value: PropTypes.number.isRequired,
+    title: PropTypes.string.isRequired,
+    unit: PropTypes.string.isRequired,
+    id: PropTypes.string.isRequired,
 };
 export default Card;
