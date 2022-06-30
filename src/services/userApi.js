@@ -1,40 +1,34 @@
 import config from './config.json';
-const userApi = {
-    get: {
-        informations: async (userId) => {
-            return fetch(`${config.baseUrl}/user/${userId}`)
-                .then(response => response.json())
-                .then(json => {
-                    return json.data
-                })
-                .catch(err => err);
-        },
-        activities: async (userId) => {
-            return fetch(`${config.baseUrl}/user/${userId}/activity`)
-                .then(response => response.json())
-                .then(json => {
-                    return json.data
-                })
-                .catch(err => err);
-        },
-        averageSessions: async (userId) => {
-            return fetch(`${config.baseUrl}/user/${userId}/average-sessions`)
-                .then(response => response.json())
-                .then(json => {
-                    return json.data
-                })
-                .catch(err => err);
-        },
-        performences: async (userId) => {
-            return fetch(`${config.baseUrl}/user/${userId}/performance`)
-                .then(response => response.json())
-                .then(json => {
-                    return json.data
-                })
-                .catch(err => err);
-        }
+
+
+/**
+ * This class is used to call the user API.
+ */
+export default class Api {
+    constructor(userId) {
+        this.userId = userId;
+        this.url = `${config.baseUrl}/user/${this.userId}`;
+        this.urlRequests = {
+            informations: "",
+            activities: "/activity",
+            averageSessions: "/average-sessions",
+            performences: "/performance",
+        };
+    }
+
+    /**
+     * With this method, you can call api to get datas.
+     * 
+     * @param {String}  type - The type of data you want => informations, activities, averageSessions, performences.
+     * @returns 
+     */
+    async get(type) {
+        const resuestUrl = this.url + this.urlRequests[type];
+        return fetch(resuestUrl)
+            .then(response => response.json())
+            .then(json => {
+                return json.data
+            })
+            .catch(err => err);
     }
 }
-
-export default userApi;
-

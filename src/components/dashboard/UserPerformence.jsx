@@ -9,17 +9,14 @@ const UserPerformences = () => {
     const params = useParams();
     const userId = params.id;
 
-    // cette variable alimente le graph
+    // performences contains the user performences values. If there no data found, a mock data will be displayed.
     const [performences, setPerformences] = useState(false);
 
     useEffect(() => {
         const getData = async (user) => {
             const data = await user.getPerformence();
             if (!!data.error) {
-                const p = document.createElement("p");
-                p.textContent = data.message;
-                document.querySelector("#modal .content").appendChild(p);
-                document.getElementById("modal").style.display = "flex";
+                utils.displayMessageInModal(data.message);
                 setPerformences(utils.mocks.performences);
             } else {
                 setPerformences(data);

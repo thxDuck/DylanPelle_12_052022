@@ -1,7 +1,13 @@
 import userApi from "./userApi";
 
 
-
+/**
+ * Create a new user with id
+ * 
+ * @class User
+ * @description User class, used to get data from the api
+ * 
+ */
 export default class User {
     constructor(userId) {
         this.userId = userId;
@@ -11,8 +17,13 @@ export default class User {
         }
     }
 
+    /**
+     * @description Get the user information. If user don't exist, return an error.
+     * @returns {Promise<{firstName: string, lastName: string, age: number, score: number, keyData: {calorieCount: number, carbohydrateCount: number, lipidCount: number, proteinCount: number}}>}
+     */
     async getInformations() {
-        const user = await userApi.get.informations(this.userId);
+        const api = new userApi(this.userId);
+        const user = await api.get("informations")
         if (!user) {
             this.error.message = "Ce profil n'a pas été trouvé.";
             this.error.message = "Ce profil n'a pas été trouvé.";
@@ -31,9 +42,13 @@ export default class User {
         return formattedUser
     }
 
-
+    /**
+     * @description Get the activities of week. If data doesn't find, return an error.
+     * @returns {Promise<[{day: number, kilogram: number, calories: number}, ...]>}
+     */
     async getActivities() {
-        const activities = await userApi.get.activities(this.userId);
+        const api = new userApi(this.userId);
+        const activities = await api.get("activities")
         if (!activities || !activities.sessions) {
             this.error.message = "Activités non trouvées.";
             return this.error;
@@ -44,22 +59,28 @@ export default class User {
         })
         return sessions;
     }
-
-
+    /**
+    * @description Get the sessions length of week. If data doesn't find, return an error.
+    * @returns {Promise<[{day: string, sessionLength: number}, ...]>}
+    */
     async getAverageSessions() {
         const DAYS = ["L", "M", "M", "J", "V", "S", "D"];
-        const averageSessions = await userApi.get.averageSessions(this.userId);
+        const api = new userApi(this.userId);
+        const averageSessions = await api.get("averageSessions")
         if (!averageSessions || !averageSessions.sessions) {
             this.error.message = "Sessions non trouvées.";
             return this.error;
         }
         averageSessions.sessions.forEach(session => {
             session.day = DAYS[session.day - 1]
-        })
+        });
         return averageSessions.sessions;
     }
 
-
+    /**
+     * @description Get the performances of week. If data doesn't find, return an error.
+     * @returns {Promise<[{value: number, kind: number, label: string}, ...]>}
+     */
     async getPerformence() {
         const CATEGORIES = {
             intensity: "Intensité",
@@ -69,7 +90,8 @@ export default class User {
             energy: "Energie",
             cardio: "Cardio",
         };
-        const performencesData = await userApi.get.performences(this.userId);
+        const api = new userApi(this.userId);
+        const performencesData = await api.get("performences")
         if (!performencesData) {
             this.error.message = "Performence non trouvées.";
             return this.error;
@@ -84,7 +106,6 @@ export default class User {
             userData.label = CATEGORIES[cat];
             orderedPerformences.push(userData);
         }
-        console.log('orderedPerformences => ', orderedPerformences);
         return orderedPerformences;
     }
 }

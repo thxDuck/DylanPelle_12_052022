@@ -8,9 +8,21 @@ import Dashboard from "../dashboard/Dashboard";
 import utils from "../../services/utils.js";
 import User from "../../services/User";
 
+// This is the minimal data and there types that we need to display the dashboard.
+const userPropTypes = {
+    user: PropTypes.shape({
+        firstName: PropTypes.string.isRequired,
+        lastName: PropTypes.string.isRequired,
+        age: PropTypes.number.isRequired,
+        score: PropTypes.number.isRequired,
+        keyData: PropTypes.object.isRequired,
+    }),
+};
+
 const Main = () => {
     const params = useParams();
     const userId = params.id;
+
     // user contains the user informations. If user not found, an error will be displayed and page gender with mocked data.
     const [user, setUser] = useState(utils.mocks.userInformation);
 
@@ -20,30 +32,29 @@ const Main = () => {
     useEffect(() => {
         const getData = async (user) => {
             const data = await user.getInformations();
+            let userData = data;
             setMounted(true);
             if (!!data.error) {
                 utils.displayMessageInModal(data.message, true);
-                setUser(utils.mocks.userInformation);
-            } else {
-                setUser(data);
+                userData = utils.mocks.userInformation;
             }
+            const propsToCheck = { user: userData };
+            PropTypes.checkPropTypes(userPropTypes, propsToCheck, "user", "Main");
+            setUser(userData);
         };
+
         const user = new User(userId);
         getData(user);
     }, [userId]);
-    console.log(user);
-    return !user ? (
-        ""
-    ) : (
+
+    return !!user ? (
         <main>
             {mounted ? <Header name={user.firstName} mock={user.mock} /> : ""}
             {!user.mock ? <Dashboard userId={userId} score={user.score} userInformations={user.keyData} /> : ""}
         </main>
+    ) : (
+        ""
     );
 };
-Main.propTypes = {
-    userId: PropTypes.number,
-    score: PropTypes.number,
-    userInformations: PropTypes.number,
-};
+
 export default Main;

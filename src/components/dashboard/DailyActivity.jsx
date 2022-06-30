@@ -8,16 +8,15 @@ import utils from "../../services/utils.js";
 const DailyActivity = () => {
     const params = useParams();
     const userId = params.id;
+
+    // activities contains the user activities of the week. If there no data found, a mock data will be displayed.
     const [activities, setActivities] = useState(utils.mocks.activities);
 
     useEffect(() => {
         const getActivities = async (user) => {
             const activitiesData = await user.getActivities();
             if (!!activitiesData.error) {
-                const p = document.createElement("p");
-                p.textContent = activitiesData.message;
-                document.querySelector("#modal .content").appendChild(p);
-                document.getElementById("modal").style.display = "flex";
+                utils.displayMessageInModal(activitiesData.message);
                 setActivities(utils.mocks.activities);
             } else {
                 setActivities(activitiesData);
@@ -58,7 +57,6 @@ const DailyActivity = () => {
                             { id: "legend-cal", value: "Calories brûlées (kCal)", type: "circle", color: "#E60000" },
                         ]}
                     />
-
                     <XAxis dataKey="day" tickMargin="15" />
                     <YAxis yAxisId="right" orientation="right" tickLine={false} axisLine={true} type="number" domain={["dataMin - 2", "dataMax + 2"]} tickCount="4" />
                     <YAxis yAxisId="left" orientation="left" hide={true} />
@@ -74,7 +72,14 @@ const DailyActivity = () => {
 
 export default DailyActivity;
 
-const CustomTooltip = ({ label, active, payload }) => {
+/**
+ * Custom tooltip for the daily activity chart. We display the weight and the calories burned.
+ *
+ * @param {Boolean} active - The active state of the tooltip.
+ * @param {Array} payload - Contains data of the current bar hovered.
+ * @returns
+ */
+const CustomTooltip = ({ active, payload }) => {
     if (active && payload?.length > 0) {
         return (
             <div className="custom-tooltip">

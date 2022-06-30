@@ -8,16 +8,14 @@ import utils from "../../services/utils.js";
 const AverageSessions = () => {
     const params = useParams();
     const userId = params.id;
+    // sessions contains the user sessions length of the week. If there no data found, a mock data will be displayed.
     const [sessions, setSessions] = useState(false);
 
     useEffect(() => {
         const getData = async (user) => {
             const data = await user.getAverageSessions();
             if (!!data.error) {
-                const p = document.createElement("p");
-                p.textContent = data.message;
-                document.querySelector("#modal .content").appendChild(p);
-                document.getElementById("modal").style.display = "flex";
+                utils.displayMessageInModal(data.message);
                 setSessions(utils.mocks.averageSessions);
             } else {
                 setSessions(data);
@@ -49,6 +47,13 @@ const AverageSessions = () => {
     );
 };
 
+/**
+ * Custom tooltip for the average sessions chart. We display the time in minutes.
+ *
+ * @param {Boolean} active - The active state of the tooltip.
+ * @param {Array} payload - Contains data of the current day hovered.
+ * @returns
+ */
 const CustomTooltip = ({ active, payload }) => {
     if (active) {
         const sessionLength = `${payload[0].payload.sessionLength} min`;
