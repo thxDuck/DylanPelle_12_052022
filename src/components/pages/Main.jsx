@@ -27,17 +27,6 @@ const Main = () => {
             } else {
                 setUser(data);
             }
-
-            // const displayMessageInModal = (message, emptyFirst = false) => {
-            //     const modal = document.getElementById("modal");
-            //     const modalContent = modal.firstChild;
-
-            //     if (emptyFirst) modalContent.innerHTML = "";
-            //     const p = document.createElement("p");
-            //     p.textContent = message;
-            //     modalContent.appendChild(p);
-            //     modal.style.display = "flex";
-            // };
         };
         const user = new User(userId);
         getData(user);

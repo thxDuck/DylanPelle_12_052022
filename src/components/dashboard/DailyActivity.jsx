@@ -1,16 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import styled from "styled-components";
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from "recharts";
 
 import User from "../../services/User";
 import utils from "../../services/utils.js";
-
-const Paragraph = styled.p`
-    font-size: 1rem;
-    font-weight: 500;
-    color: #20253a;
-`;
 
 const DailyActivity = () => {
     const params = useParams();
@@ -39,7 +32,7 @@ const DailyActivity = () => {
     ) : (
         <div id="dailyActivity">
             <div className="title">
-                <Paragraph>Activité quotidienne</Paragraph>
+                <p>Activité quotidienne</p>
             </div>
             <ResponsiveContainer width="100%" height="100%">
                 <BarChart
