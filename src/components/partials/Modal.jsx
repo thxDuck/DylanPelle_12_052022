@@ -1,7 +1,6 @@
 import React from "react";
 
 const closeModal = () => {
-    console.log("close");
     document.getElementById("modal").style.display = "none";
 };
 

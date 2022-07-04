@@ -2,9 +2,10 @@ import config from './config.json';
 
 
 /**
- * This class is used to call the user API.
+ * @class UserApi
+ * @description Class to call the api of the user.
  */
-export default class Api {
+export default class UserApi {
     constructor(userId) {
         this.userId = userId;
         this.url = `${config.baseUrl}/user/${this.userId}`;
@@ -20,7 +21,7 @@ export default class Api {
      * With this method, you can call api to get datas.
      * 
      * @param {String}  type - The type of data you want => informations, activities, averageSessions, performences.
-     * @returns 
+     * @returns {Promise<any>} - Response of api
      */
     async get(type) {
         const resuestUrl = this.url + this.urlRequests[type];

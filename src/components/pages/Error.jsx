@@ -1,14 +1,22 @@
 import React from "react";
 import PropTypes from "prop-types";
 
+/**
+ * @description This is error page. Pass error code and error message to display error to user.
+ *
+ * @param {string} message - The error message.
+ * @param {string} code - The error code.
+ * @returns {React.Component}
+ */
 const Error = (props) => {
     // Error must contains an error code and a message in user language
-    const error = props.error;
+    const message = props.msg || "Une erreur est survenue";
+    const code = props.code || "0x000";
     return (
         <main className="error">
             <p>
-                {error.msg}
-                <small>(code : {error.code})</small>
+                {message}
+                <small>(code : {code})</small>
             </p>
         </main>
     );
@@ -17,8 +25,6 @@ const Error = (props) => {
 export default Error;
 
 Error.propTypes = {
-    error: PropTypes.exact({
-        msg: PropTypes.string.isRequired,
-        code: PropTypes.string.isRequired,
-    }),
+    msg: PropTypes.string,
+    code: PropTypes.string,
 };

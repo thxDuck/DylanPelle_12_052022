@@ -52,7 +52,7 @@ const AverageSessions = () => {
  *
  * @param {Boolean} active - The active state of the tooltip.
  * @param {Array} payload - Contains data of the current day hovered.
- * @returns
+ * @returns {HTMLElement} - The tooltip element.
  */
 const CustomTooltip = ({ active, payload }) => {
     if (active) {

@@ -7,6 +7,10 @@ import UserPerformence from "./UserPerformence.jsx";
 import UserObjective from "./UserObjective.jsx";
 import UserInformations from "./UserInformations.jsx";
 
+/**
+ * This is the component that contains all charts and informations about the user.
+ * @returns
+ */
 const Dashboard = (props) => {
     const score = props.score;
     const userInformations = props.userInformations;

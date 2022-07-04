@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import PropTypes from "prop-types";
 
 import Header from "../partials/header/Header";
 import Dashboard from "../dashboard/Dashboard";
@@ -8,25 +7,23 @@ import Dashboard from "../dashboard/Dashboard";
 import utils from "../../services/utils.js";
 import User from "../../services/User";
 
-// This is the minimal data and there types that we need to display the dashboard.
-const userPropTypes = {
-    user: PropTypes.shape({
-        firstName: PropTypes.string.isRequired,
-        lastName: PropTypes.string.isRequired,
-        age: PropTypes.number.isRequired,
-        score: PropTypes.number.isRequired,
-        keyData: PropTypes.object.isRequired,
-    }),
-};
-
+/**
+ * This is the main page. It get user id in url and get information from API.
+ * Display dashboard if user is found, else display only Header component.
+ *
+ * @returns {React.Component}
+ */
 const Main = () => {
     const params = useParams();
     const userId = params.id;
 
-    // user contains the user informations. If user not found, an error will be displayed and page gender with mocked data.
+    /**
+     * Contains user information, or a simulation if the API does not find the user.
+     */
     const [user, setUser] = useState(utils.mocks.userInformation);
-
-    // set monted true when we receive a response from the api
+    /**
+     * Used to see if api call is done.
+     */
     const [mounted, setMounted] = useState(false);
 
     useEffect(() => {
@@ -38,8 +35,6 @@ const Main = () => {
                 utils.displayMessageInModal(data.message, true);
                 userData = utils.mocks.userInformation;
             }
-            const propsToCheck = { user: userData };
-            PropTypes.checkPropTypes(userPropTypes, propsToCheck, "user", "Main");
             setUser(userData);
         };
 

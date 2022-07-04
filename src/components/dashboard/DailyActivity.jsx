@@ -5,6 +5,11 @@ import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, Responsive
 import User from "../../services/User";
 import utils from "../../services/utils.js";
 
+/**
+ * TODO : Describe component.
+ *
+ * @returns {JSX.Element}
+ */
 const DailyActivity = () => {
     const params = useParams();
     const userId = params.id;
@@ -77,7 +82,7 @@ export default DailyActivity;
  *
  * @param {Boolean} active - The active state of the tooltip.
  * @param {Array} payload - Contains data of the current bar hovered.
- * @returns
+ * @returns {HTMLElement} - The tooltip element.
  */
 const CustomTooltip = ({ active, payload }) => {
     if (active && payload?.length > 0) {

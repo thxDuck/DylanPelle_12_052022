@@ -9,7 +9,7 @@ const utils = {
      * Empty modal if you want, put message and display modal.
      * 
      * @param {String} message - The message to add in the modal
-     * @param {Boolean: false} emptyFirst - If the modal need to be empty or not
+     * @param {Boolean} emptyFirst - If the modal need to be empty or not
      */
     displayMessageInModal: (message, emptyFirst = false) => {
         const modal = document.getElementById("modal");
