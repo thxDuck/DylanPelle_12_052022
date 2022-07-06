@@ -1,12 +1,15 @@
 import React from "react";
-import Card from "../partials/Card.jsx";
 import PropTypes from "prop-types";
+import Card from "../partials/Card.jsx";
 
+import carbohydrateIcon from "../../assets/images/icons/carbohydrate.svg";
 import caloriesIcon from "../../assets/images/icons/calories.svg";
 import proteinIcon from "../../assets/images/icons/protein.svg";
-import carbohydrateIcon from "../../assets/images/icons/carbohydrate.svg";
 import lipidIcon from "../../assets/images/icons/lipid.svg";
 
+/**
+ * Data by key is an object that contains the key name and the icon and unit of the data to display labels in french.
+ */
 const dataByKey = {
     calorieCount: {
         name: "Calories",
@@ -33,6 +36,12 @@ const dataByKey = {
         icon: lipidIcon,
     },
 };
+
+/**
+ * This is the component that contains cards with informations about nutriments of user.
+ * @param {{}} props - Values of nutriments of the user
+ * @returns {React.FunctionComponent} - Components contains all cards with nutriment informations.
+ */
 const UserInformations = (props) => {
     const userInformations = props.userInformations;
 

@@ -5,6 +5,10 @@ import swim from "../../../assets/images/icons/swim.svg";
 import cycling from "../../../assets/images/icons/cycling.svg";
 import strong from "../../../assets/images/icons/strong.svg";
 
+/**
+ *  Vertical navigation contains links to different pages of user.
+ * @returns {React.FunctionComponent} - Horizontal navigation.
+ */
 const VerticalNav = () => {
     return (
         <div className="navbar-left">

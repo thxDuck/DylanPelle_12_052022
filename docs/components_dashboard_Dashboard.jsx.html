@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: services/UserApi.js</title>
+    <title>JSDoc: Source: components/dashboard/Dashboard.jsx</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: services/UserApi.js</h1>
+    <h1 class="page-title">Source: components/dashboard/Dashboard.jsx</h1>
 
     
 
@@ -26,41 +26,50 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>import config from './config.json';
+            <pre class="prettyprint source linenums"><code>import React from "react";
+import PropTypes from "prop-types";
 
+import DailyActivity from "./DailyActivity.jsx";
+import AverageSessions from "./AverageSessions.jsx";
+import UserPerformence from "./UserPerformence.jsx";
+import UserObjective from "./UserObjective.jsx";
+import UserInformations from "./UserInformations.jsx";
 
 /**
- * @class UserApi
- * @description Class to call the api of the user.
+ * This is the component that contains all charts and informations about the user. 
+ * 
+ * @returns {React.FunctionComponent} - Nothing while the api has not responded, then Linechart with the average sessions length
  */
-export default class UserApi {
-    constructor(userId) {
-        this.userId = userId;
-        this.url = `${config.baseUrl}/user/${this.userId}`;
-        this.urlRequests = {
-            informations: "",
-            activities: "/activity",
-            averageSessions: "/average-sessions",
-            performences: "/performance",
-        };
-    }
+const Dashboard = (props) => {
+    const score = props.score;
+    const userInformations = props.userInformations;
+    return (
+        &lt;section id="dashboard">
+            &lt;div className="container">
+                &lt;DailyActivity />
+                &lt;div className="bottom-row">
+                    &lt;AverageSessions />
+                    &lt;UserPerformence />
+                    &lt;UserObjective score={score} />
+                &lt;/div>
+            &lt;/div>
+            &lt;UserInformations userInformations={userInformations} />
+        &lt;/section>
+    );
+};
 
-    /**
-     * With this method, you can call api to get datas.
-     * 
-     * @param {String}  type - The type of data you want => informations, activities, averageSessions, performences.
-     * @returns {Promise&lt;any>} - Response of api
-     */
-    async get(type) {
-        const resuestUrl = this.url + this.urlRequests[type];
-        return fetch(resuestUrl)
-            .then(response => response.json())
-            .then(json => {
-                return json.data
-            })
-            .catch(err => err);
-    }
-}</code></pre>
+Dashboard.propTypes = {
+    score: PropTypes.number.isRequired,
+    userInformations: PropTypes.exact({
+        calorieCount: PropTypes.number.isRequired,
+        proteinCount: PropTypes.number.isRequired,
+        carbohydrateCount: PropTypes.number.isRequired,
+        lipidCount: PropTypes.number.isRequired,
+    }),
+};
+
+export default Dashboard;
+</code></pre>
         </article>
     </section>
 

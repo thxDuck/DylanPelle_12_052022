@@ -26,116 +26,125 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>import UserApi from "./UserApi";
+            <pre class="prettyprint source linenums"><code>import UserApi from "./UserApi"
 
 /**
  * @class User
  * @description Used for api calls and format data for components.Make sure to call the constructor with the user id.
  */
 export default class User {
-    /**
-     * @param {number} userId Id of user
-     */
-    constructor(userId) {
-        this.userId = userId;
-        this.error = {
-            error: true,
-            message: ""
-        }
-    }
+	/**
+	 * @param {number} userId Id of user
+	 */
+	constructor(userId) {
+		this.userId = userId
+		this.error = {
+			error: true,
+			message: "",
+		}
+	}
 
-    /**
-     * @description Get personnal information of user from api. Format elements before send to component. If data doesn't find, return an error.
-     * @returns {Promise&lt;{firstName: string, lastName: string, age: number, score: number, keyData: {calorieCount: number, carbohydrateCount: number, lipidCount: number, proteinCount: number}}>}
-     */
-    async getInformations() {
-        const api = new UserApi(this.userId);
-        const user = await api.get("informations")
-        if (!user) {
-            this.error.message = "Ce profil n'a pas été trouvé.";
-            this.error.message = "Ce profil n'a pas été trouvé.";
-            return this.error;
-        }
-        const userInfos = user.userInfos;
-        const formattedUser = {
-            id: user.id,
-            mock: false,
-            firstName: userInfos.firstName,
-            lastName: userInfos.lastName,
-            age: userInfos.age,
-            keyData: user.keyData,
-        }
-        formattedUser.score = !!user.score ? user.score : (!!user.todayScore ? user.todayScore : 0);
-        return formattedUser
-    }
+	/**
+	 * @description Get personnal information of user from api. Format elements before send to component. If data doesn't find, return an error.
+	 * @returns {Promise&lt;{firstName: string, lastName: string, age: number, score: number, keyData: {calorieCount: number, carbohydrateCount: number, lipidCount: number, proteinCount: number}}>}
+	 */
+	async getInformations() {
+		const api = new UserApi(this.userId)
+		try {
+			const user = await api.get("informations")
+			const userInfos = user.userInfos
+			const formattedUser = {
+				id: user.id,
+				mock: false,
+				firstName: userInfos.firstName,
+				lastName: userInfos.lastName,
+				age: userInfos.age,
+				keyData: user.keyData,
+			}
+			formattedUser.score = !!user.score ? user.score : !!user.todayScore ? user.todayScore : 0
+			return formattedUser
+		} catch (error) {
+			this.error.message = "Ce profil n'a pas été trouvé."
+			this.error.message = "Ce profil n'a pas été trouvé."
+			return this.error
+		}
+	}
 
-    /**
-     * @description Get the activities of week from api. Format day like the number of day of the week. If data doesn't find, return an error.
-     * @returns {Array.Promise&lt;{day: number, kilogram: number, calories: number}>}
-     */
-    async getActivities() {
-        const api = new UserApi(this.userId);
-        const activities = await api.get("activities")
-        if (!activities || !activities.sessions) {
-            this.error.message = "Activités non trouvées.";
-            return this.error;
-        }
-        const sessions = activities.sessions;
-        sessions.forEach(session => {
-            session.day = new Date(session.day).getDate();
-        })
-        return sessions;
-    }
-    /**
-     * @description Get the sessions length of week from api. If data doesn't find, return an error.
-     * @returns {Array.Promise&lt;{day: string, sessionLength: number}>}
-    */
-    async getAverageSessions() {
-        const DAYS = ["L", "M", "M", "J", "V", "S", "D"];
-        const api = new UserApi(this.userId);
-        const averageSessions = await api.get("averageSessions")
-        if (!averageSessions || !averageSessions.sessions) {
-            this.error.message = "Sessions non trouvées.";
-            return this.error;
-        }
-        averageSessions.sessions.forEach(session => {
-            session.day = DAYS[session.day - 1]
-        });
-        return averageSessions.sessions;
-    }
+	/**
+	 * @description Get the activities of week from api. Format day like the number of day of the week. If data doesn't find, return an error.
+	 * @returns {Array.Promise&lt;{day: number, kilogram: number, calories: number}>}
+	 */
+	async getActivities() {
+		try {
+			const api = new UserApi(this.userId)
+			const activities = await api.get("activities")
+			if (!activities || !activities.sessions) {
+			}
+			const sessions = activities.sessions
+			sessions.forEach((session) => {
+				session.day = new Date(session.day).getDate()
+			})
+			return sessions
+		} catch (error) {
+			this.error.message = "Activités non trouvées."
+			return this.error
+		}
+	}
+	/**
+	 * @description Get the sessions length of week from api. If data doesn't find, return an error.
+	 * @returns {Array.Promise&lt;{day: string, sessionLength: number}>}
+	 */
+	async getAverageSessions() {
+		try {
+			const DAYS = ["L", "M", "M", "J", "V", "S", "D"]
+			const api = new UserApi(this.userId)
+			const averageSessions = await api.get("averageSessions")
+			averageSessions.sessions.forEach((session) => {
+				session.day = DAYS[session.day - 1]
+			})
+			return averageSessions.sessions
+		} catch (error) {
+			this.error.message = "Sessions non trouvées."
+			return this.error
+		}
+	}
 
-    /**
-     * @description Get the performances of week from api. Sorts the data to have the best order to display them in the chart. If data doesn't find, return an error.
-     * @returns {Array.Promise&lt;{value: number, kind: number, label: string}>}
-     */
-    async getPerformence() {
-        const CATEGORIES = {
-            intensity: "Intensité",
-            speed: "Vitesse",
-            strength: "Force",
-            endurance: "Endurance",
-            energy: "Energie",
-            cardio: "Cardio",
-        };
-        const api = new UserApi(this.userId);
-        const performencesData = await api.get("performences")
-        if (!performencesData) {
-            this.error.message = "Performence non trouvées.";
-            return this.error;
-        }
-        const categoriesNames = Object.keys(CATEGORIES);
-        const kindDataArray = Object.values(performencesData.kind);
-        const orderedPerformences = [];
-        for (let i = 0; i &lt; categoriesNames.length; i++) {
-            const cat = categoriesNames[i];
-            const kindIndex = kindDataArray.findIndex(value => value === cat);
-            const userData = performencesData.data.find(d => d.kind === kindIndex + 1);
-            userData.label = CATEGORIES[cat];
-            orderedPerformences.push(userData);
-        }
-        return orderedPerformences;
-    }
-}</code></pre>
+	/**
+	 * @description Get the performances of week from api. Sorts the data to have the best order to display them in the chart. If data doesn't find, return an error.
+	 * @returns {Array.Promise&lt;{value: number, kind: number, label: string}>}
+	 */
+	async getPerformence() {
+		const CATEGORIES = {
+			intensity: "Intensité",
+			speed: "Vitesse",
+			strength: "Force",
+			endurance: "Endurance",
+			energy: "Energie",
+			cardio: "Cardio",
+		}
+		try {
+			const api = new UserApi(this.userId)
+			const performencesData = await api.get("performences")
+			if (!performencesData) {
+			}
+			const categoriesNames = Object.keys(CATEGORIES)
+			const kindDataArray = Object.values(performencesData.kind)
+			const orderedPerformences = []
+			for (let i = 0; i &lt; categoriesNames.length; i++) {
+				const cat = categoriesNames[i]
+				const kindIndex = kindDataArray.findIndex((value) => value === cat)
+				const userData = performencesData.data.find((d) => d.kind === kindIndex + 1)
+				userData.label = CATEGORIES[cat]
+				orderedPerformences.push(userData)
+			}
+			return orderedPerformences
+		} catch (error) {
+			this.error.message = "Performence non trouvées."
+			return this.error
+		}
+	}
+}
+</code></pre>
         </article>
     </section>
 
@@ -145,13 +154,13 @@ export default class User {
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="module.exports_module.exports.html">exports</a></li><li><a href="User.html">User</a></li><li><a href="UserApi.html">UserApi</a></li></ul><h3>Global</h3><ul><li><a href="global.html#CustomTooltip">CustomTooltip</a></li><li><a href="global.html#DailyActivity">DailyActivity</a></li><li><a href="global.html#Error">Error</a></li><li><a href="global.html#get">get</a></li><li><a href="global.html#getActivities">getActivities</a></li><li><a href="global.html#getAverageSessions">getAverageSessions</a></li><li><a href="global.html#getInformations">getInformations</a></li><li><a href="global.html#getPerformence">getPerformence</a></li><li><a href="global.html#Main">Main</a></li><li><a href="global.html#RoutesApp">RoutesApp</a></li><li><a href="global.html#utils">utils</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="module.exports_module.exports.html">exports</a></li><li><a href="User.html">User</a></li><li><a href="UserApi.html">UserApi</a></li></ul><h3>Global</h3><ul><li><a href="global.html#App">App</a></li><li><a href="global.html#AverageSessions">AverageSessions</a></li><li><a href="global.html#Card">Card</a></li><li><a href="global.html#closeModal">closeModal</a></li><li><a href="global.html#CustomTooltip">CustomTooltip</a></li><li><a href="global.html#DailyActivity">DailyActivity</a></li><li><a href="global.html#Dashboard">Dashboard</a></li><li><a href="global.html#dataByKey">dataByKey</a></li><li><a href="global.html#Error">Error</a></li><li><a href="global.html#get">get</a></li><li><a href="global.html#getActivities">getActivities</a></li><li><a href="global.html#getAverageSessions">getAverageSessions</a></li><li><a href="global.html#getInformations">getInformations</a></li><li><a href="global.html#getPerformence">getPerformence</a></li><li><a href="global.html#Header">Header</a></li><li><a href="global.html#HorizontalNav">HorizontalNav</a></li><li><a href="global.html#Main">Main</a></li><li><a href="global.html#Modal">Modal</a></li><li><a href="global.html#RoutesApp">RoutesApp</a></li><li><a href="global.html#SelectUser">SelectUser</a></li><li><a href="global.html#UserInformations">UserInformations</a></li><li><a href="global.html#UserObjective">UserObjective</a></li><li><a href="global.html#UserPerformences">UserPerformences</a></li><li><a href="global.html#utils">utils</a></li><li><a href="global.html#VerticalNav">VerticalNav</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.10</a> on Fri Jul 01 2022 16:52:14 GMT+0200 (Central European Summer Time)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.10</a> on Wed Jul 06 2022 13:51:09 GMT+0200 (heure d’été d’Europe centrale)
 </footer>
 
 <script> prettyPrint(); </script>

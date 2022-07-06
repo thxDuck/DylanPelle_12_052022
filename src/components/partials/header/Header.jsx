@@ -6,7 +6,7 @@ import PropTypes from "prop-types";
  *
  * @param {string} name - Name of user
  * @param {bool} mock - If is a mocked user
- * @returns
+ * @returns {React.FunctionComponent} - Header component with name and message to user.
  */
 const Header = (props) => {
     const name = props.name;

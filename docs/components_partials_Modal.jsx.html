@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: services/UserApi.js</title>
+    <title>JSDoc: Source: components/partials/Modal.jsx</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: services/UserApi.js</h1>
+    <h1 class="page-title">Source: components/partials/Modal.jsx</h1>
 
     
 
@@ -26,41 +26,40 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>import config from './config.json';
-
+            <pre class="prettyprint source linenums"><code>import React from "react";
 
 /**
- * @class UserApi
- * @description Class to call the api of the user.
+ * This function is used to close the modal.
  */
-export default class UserApi {
-    constructor(userId) {
-        this.userId = userId;
-        this.url = `${config.baseUrl}/user/${this.userId}`;
-        this.urlRequests = {
-            informations: "",
-            activities: "/activity",
-            averageSessions: "/average-sessions",
-            performences: "/performance",
-        };
-    }
+const closeModal = () => {
+    document.getElementById("modal").style.display = "none";
+};
 
-    /**
-     * With this method, you can call api to get datas.
-     * 
-     * @param {String}  type - The type of data you want => informations, activities, averageSessions, performences.
-     * @returns {Promise&lt;any>} - Response of api
-     */
-    async get(type) {
-        const resuestUrl = this.url + this.urlRequests[type];
-        return fetch(resuestUrl)
-            .then(response => response.json())
-            .then(json => {
-                return json.data
-            })
-            .catch(err => err);
-    }
-}</code></pre>
+/**
+ * Modal used to display information to user.
+ * To add a message and display the modal, call displayMessageInModal function in "/src/services/utils.js"
+ * @component
+ * @returns {React.FunctionComponent} - Modal component used to display information to user.
+ */
+const Modal = () => {
+    return (
+        &lt;div id="modal">
+            &lt;div className="modal-content">
+                &lt;div className="modal-body">
+                    &lt;h2 className="title">Erreur&lt;/h2>
+                    &lt;div className="content">&lt;/div>
+                    &lt;div className="modal-footer">
+                        &lt;button className="closeModal" onClick={closeModal}>
+                            Fermer
+                        &lt;/button>
+                    &lt;/div>
+                &lt;/div>
+            &lt;/div>
+        &lt;/div>
+    );
+};
+export default Modal;
+</code></pre>
         </article>
     </section>
 

@@ -1,6 +1,11 @@
 import React from "react";
 import PropTypes from "prop-types";
 
+
+/**
+ * Display nutriment informations with correct icon and color.
+ * @returns {React.FunctionComponent} - Nutriment card.
+ */
 const Card = (props) => {
     const icon = props.icon;
     const value = props.value;
@@ -21,10 +26,10 @@ const Card = (props) => {
     );
 };
 Card.propTypes = {
+    id: PropTypes.string.isRequired,
     icon: PropTypes.string.isRequired,
     value: PropTypes.number.isRequired,
     title: PropTypes.string.isRequired,
     unit: PropTypes.string.isRequired,
-    id: PropTypes.string.isRequired,
 };
 export default Card;

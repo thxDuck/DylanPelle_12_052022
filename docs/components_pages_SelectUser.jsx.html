@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: services/UserApi.js</title>
+    <title>JSDoc: Source: components/pages/SelectUser.jsx</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: services/UserApi.js</h1>
+    <h1 class="page-title">Source: components/pages/SelectUser.jsx</h1>
 
     
 
@@ -26,41 +26,48 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>import config from './config.json';
+            <pre class="prettyprint source linenums"><code>import React from "react";
+import { Link } from "react-router-dom";
 
 
 /**
- * @class UserApi
- * @description Class to call the api of the user.
+ * Use only this page in developement of testing. That page is used to display users mocked.
+ * @returns {React.FunctionComponent} - Selection of user mocked for development.
  */
-export default class UserApi {
-    constructor(userId) {
-        this.userId = userId;
-        this.url = `${config.baseUrl}/user/${this.userId}`;
-        this.urlRequests = {
-            informations: "",
-            activities: "/activity",
-            averageSessions: "/average-sessions",
-            performences: "/performance",
-        };
-    }
+const SelectUser = () => {
+    return (
+        &lt;main>
+            &lt;div
+                style={{
+                    fontSize: "1.5rem",
+                    fontWeight: "500",
+                }}
+            >
+                &lt;p>Séléctionnez un utilisateur :&lt;/p>
+                &lt;ul
+                    style={{
+                        paddingLeft: "25px",
+                        fontSize: "1rem",
+                        textDecoration: "underline",
+                    }}
+                >
+                    &lt;li>
+                        &lt;Link to="/12">12&lt;/Link>
+                    &lt;/li>
+                    &lt;li>
+                        &lt;Link to="/18">18&lt;/Link>
+                    &lt;/li>
+                    &lt;li>
+                        &lt;Link to="/1">1 (utilisateur avec données manquantes)&lt;/Link>
+                    &lt;/li>
+                &lt;/ul>
+            &lt;/div>
+        &lt;/main>
+    );
+};
 
-    /**
-     * With this method, you can call api to get datas.
-     * 
-     * @param {String}  type - The type of data you want => informations, activities, averageSessions, performences.
-     * @returns {Promise&lt;any>} - Response of api
-     */
-    async get(type) {
-        const resuestUrl = this.url + this.urlRequests[type];
-        return fetch(resuestUrl)
-            .then(response => response.json())
-            .then(json => {
-                return json.data
-            })
-            .catch(err => err);
-    }
-}</code></pre>
+export default SelectUser;
+</code></pre>
         </article>
     </section>
 

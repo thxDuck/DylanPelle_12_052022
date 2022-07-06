@@ -1,6 +1,11 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
+
+/**
+ * Use only this page in developement of testing. That page is used to display users mocked.
+ * @returns {React.FunctionComponent} - Selection of user mocked for development.
+ */
 const SelectUser = () => {
     return (
         <main>

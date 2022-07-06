@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: services/UserApi.js</title>
+    <title>JSDoc: Source: components/partials/header/HorizontalNav.jsx</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: services/UserApi.js</h1>
+    <h1 class="page-title">Source: components/partials/header/HorizontalNav.jsx</h1>
 
     
 
@@ -26,41 +26,44 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>import config from './config.json';
-
+            <pre class="prettyprint source linenums"><code>import React from "react";
+import Logo from "../../../assets/images/icons/logo.svg";
 
 /**
- * @class UserApi
- * @description Class to call the api of the user.
+ *  Horizontal navigation contains links with sports
+ * @returns {React.FunctionComponent} - Horizontal navigation.
  */
-export default class UserApi {
-    constructor(userId) {
-        this.userId = userId;
-        this.url = `${config.baseUrl}/user/${this.userId}`;
-        this.urlRequests = {
-            informations: "",
-            activities: "/activity",
-            averageSessions: "/average-sessions",
-            performences: "/performance",
-        };
-    }
+const HorizontalNav = () => {
+    return (
+        &lt;div className="navbar-top">
+            &lt;div className="logo">
+                &lt;img src={Logo} alt="courreur" />
+            &lt;/div>
+            &lt;div className="navbar-top__pages">
+                &lt;ul>
+                    &lt;li>
+                        &lt;a href="/">Accueil&lt;/a>
+                    &lt;/li>
 
-    /**
-     * With this method, you can call api to get datas.
-     * 
-     * @param {String}  type - The type of data you want => informations, activities, averageSessions, performences.
-     * @returns {Promise&lt;any>} - Response of api
-     */
-    async get(type) {
-        const resuestUrl = this.url + this.urlRequests[type];
-        return fetch(resuestUrl)
-            .then(response => response.json())
-            .then(json => {
-                return json.data
-            })
-            .catch(err => err);
-    }
-}</code></pre>
+                    &lt;li>
+                        &lt;a href="/12">Profil&lt;/a>
+                    &lt;/li>
+
+                    &lt;li>
+                        &lt;a href="/18">Réglage&lt;/a>
+                    &lt;/li>
+
+                    &lt;li>
+                        &lt;a href="/1">Communauté&lt;/a>
+                    &lt;/li>
+                &lt;/ul>
+            &lt;/div>
+        &lt;/div>
+    );
+};
+
+export default HorizontalNav;
+</code></pre>
         </article>
     </section>
 

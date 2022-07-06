@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: services/UserApi.js</title>
+    <title>JSDoc: Source: components/partials/Card.jsx</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: services/UserApi.js</h1>
+    <h1 class="page-title">Source: components/partials/Card.jsx</h1>
 
     
 
@@ -26,41 +26,42 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>import config from './config.json';
+            <pre class="prettyprint source linenums"><code>import React from "react";
+import PropTypes from "prop-types";
 
 
 /**
- * @class UserApi
- * @description Class to call the api of the user.
+ * Display nutriment informations with correct icon and color.
+ * @returns {React.FunctionComponent} - Nutriment card.
  */
-export default class UserApi {
-    constructor(userId) {
-        this.userId = userId;
-        this.url = `${config.baseUrl}/user/${this.userId}`;
-        this.urlRequests = {
-            informations: "",
-            activities: "/activity",
-            averageSessions: "/average-sessions",
-            performences: "/performance",
-        };
-    }
+const Card = (props) => {
+    const icon = props.icon;
+    const value = props.value;
+    const title = props.title;
+    const unit = props.unit;
+    const id = props.id;
 
-    /**
-     * With this method, you can call api to get datas.
-     * 
-     * @param {String}  type - The type of data you want => informations, activities, averageSessions, performences.
-     * @returns {Promise&lt;any>} - Response of api
-     */
-    async get(type) {
-        const resuestUrl = this.url + this.urlRequests[type];
-        return fetch(resuestUrl)
-            .then(response => response.json())
-            .then(json => {
-                return json.data
-            })
-            .catch(err => err);
-    }
-}</code></pre>
+    return (
+        &lt;div className="card" id={id}>
+            &lt;div className="card__icon">
+                &lt;img src={icon} alt="" />
+            &lt;/div>
+            &lt;div className="card__text">
+                &lt;p className="card__text--val">{`${value}${unit}`}&lt;/p>
+                &lt;p className="card__text--title">{title}&lt;/p>
+            &lt;/div>
+        &lt;/div>
+    );
+};
+Card.propTypes = {
+    id: PropTypes.string.isRequired,
+    icon: PropTypes.string.isRequired,
+    value: PropTypes.number.isRequired,
+    title: PropTypes.string.isRequired,
+    unit: PropTypes.string.isRequired,
+};
+export default Card;
+</code></pre>
         </article>
     </section>
 

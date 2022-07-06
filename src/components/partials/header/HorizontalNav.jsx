@@ -1,6 +1,10 @@
 import React from "react";
 import Logo from "../../../assets/images/icons/logo.svg";
 
+/**
+ *  Horizontal navigation contains links with sports
+ * @returns {React.FunctionComponent} - Horizontal navigation.
+ */
 const HorizontalNav = () => {
     return (
         <div className="navbar-top">

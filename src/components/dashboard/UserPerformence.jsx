@@ -1,10 +1,14 @@
+import { ResponsiveContainer, RadarChart, PolarGrid, PolarAngleAxis, Radar } from "recharts";
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { ResponsiveContainer, RadarChart, PolarGrid, PolarAngleAxis, Radar } from "recharts";
 
-import User from "../../services/User";
 import utils from "../../services/utils.js";
+import User from "../../services/User";
 
+/**
+ * 
+ * @returns {React.FunctionComponent} - Nothing while the api has not responded, then Radar chart with performence of user.
+ */
 const UserPerformences = () => {
     const params = useParams();
     const userId = params.id;

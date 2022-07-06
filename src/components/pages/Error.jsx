@@ -2,11 +2,11 @@ import React from "react";
 import PropTypes from "prop-types";
 
 /**
- * @description This is error page. Pass error code and error message to display error to user.
+ * This is error page. Pass error code and error message to display error to user.
  *
  * @param {string} message - The error message.
  * @param {string} code - The error code.
- * @returns {React.Component}
+ * @returns {React.FunctionComponent} - Error page with a message and a code.
  */
 const Error = (props) => {
     // Error must contains an error code and a message in user language

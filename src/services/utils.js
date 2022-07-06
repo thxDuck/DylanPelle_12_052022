@@ -1,8 +1,8 @@
-import mocks from "./mocks";
+import mocks from "./Mocks";
 
 /**
  * Utils contains all utilities functions, variables that are used in the app.
- * 
+ * To use utils functions, import this file and call Utils.functionName().
  */
 const utils = {
     /**

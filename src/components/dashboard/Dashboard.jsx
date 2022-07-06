@@ -8,8 +8,9 @@ import UserObjective from "./UserObjective.jsx";
 import UserInformations from "./UserInformations.jsx";
 
 /**
- * This is the component that contains all charts and informations about the user.
- * @returns
+ * This is the component that contains all charts and informations about the user. 
+ * 
+ * @returns {React.FunctionComponent} - Nothing while the api has not responded, then Linechart with the average sessions length
  */
 const Dashboard = (props) => {
     const score = props.score;

@@ -11,7 +11,7 @@ import User from "../../services/User";
  * This is the main page. It get user id in url and get information from API.
  * Display dashboard if user is found, else display only Header component.
  *
- * @returns {React.Component}
+ * @returns {React.FunctionComponent} - Nothing while the api has not responded, then main page with dashboard.
  */
 const Main = () => {
     const params = useParams();

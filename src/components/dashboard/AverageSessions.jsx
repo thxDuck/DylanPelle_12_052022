@@ -1,13 +1,20 @@
+import { LineChart, Line, Tooltip, XAxis, ResponsiveContainer } from "recharts";
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { LineChart, Line, Tooltip, XAxis, ResponsiveContainer } from "recharts";
 
 import User from "../../services/User";
 import utils from "../../services/utils.js";
 
+
+/**
+ * This component displays the average sessions length chart of current week.
+ * 
+ * @returns {React.FunctionComponent} - Nothing while the api has not responded, then Linechart with the average sessions length
+ */
 const AverageSessions = () => {
     const params = useParams();
     const userId = params.id;
+
     // sessions contains the user sessions length of the week. If there no data found, a mock data will be displayed.
     const [sessions, setSessions] = useState(false);
 

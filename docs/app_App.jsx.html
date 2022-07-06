@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: services/UserApi.js</title>
+    <title>JSDoc: Source: app/App.jsx</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: services/UserApi.js</h1>
+    <h1 class="page-title">Source: app/App.jsx</h1>
 
     
 
@@ -26,41 +26,30 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>import config from './config.json';
+            <pre class="prettyprint source linenums"><code>import Modal from "../components/partials/Modal";
+import Nav from "../components/partials/header/Nav";
 
+import "../styles/style.css";
+import RoutesApp from "./Routes";
+
+import { BrowserRouter } from "react-router-dom";
 
 /**
- * @class UserApi
- * @description Class to call the api of the user.
+ * App component contains the entire application with the router. Minimal components needed are the nav bars and the modal.
+ * @returns {React.FunctionComponent}
  */
-export default class UserApi {
-    constructor(userId) {
-        this.userId = userId;
-        this.url = `${config.baseUrl}/user/${this.userId}`;
-        this.urlRequests = {
-            informations: "",
-            activities: "/activity",
-            averageSessions: "/average-sessions",
-            performences: "/performance",
-        };
-    }
+const App = () => {
+    return (
+        &lt;BrowserRouter>
+            &lt;Nav />
+            &lt;RoutesApp />
+            &lt;Modal />
+        &lt;/BrowserRouter>
+    );
+};
 
-    /**
-     * With this method, you can call api to get datas.
-     * 
-     * @param {String}  type - The type of data you want => informations, activities, averageSessions, performences.
-     * @returns {Promise&lt;any>} - Response of api
-     */
-    async get(type) {
-        const resuestUrl = this.url + this.urlRequests[type];
-        return fetch(resuestUrl)
-            .then(response => response.json())
-            .then(json => {
-                return json.data
-            })
-            .catch(err => err);
-    }
-}</code></pre>
+export default App;
+</code></pre>
         </article>
     </section>
 

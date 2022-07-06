@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: services/UserApi.js</title>
+    <title>JSDoc: Source: components/partials/header/Header.jsx</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: services/UserApi.js</h1>
+    <h1 class="page-title">Source: components/partials/header/Header.jsx</h1>
 
     
 
@@ -26,41 +26,37 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>import config from './config.json';
-
+            <pre class="prettyprint source linenums"><code>import React from "react";
+import PropTypes from "prop-types";
 
 /**
- * @class UserApi
- * @description Class to call the api of the user.
+ * Header component displays the name of the user and a message. If it's a mock, dipslay error message
+ *
+ * @param {string} name - Name of user
+ * @param {bool} mock - If is a mocked user
+ * @returns {React.FunctionComponent} - Header component with name and message to user.
  */
-export default class UserApi {
-    constructor(userId) {
-        this.userId = userId;
-        this.url = `${config.baseUrl}/user/${this.userId}`;
-        this.urlRequests = {
-            informations: "",
-            activities: "/activity",
-            averageSessions: "/average-sessions",
-            performences: "/performance",
-        };
-    }
+const Header = (props) => {
+    const name = props.name;
+    const mock = props.mock;
+    const message = !mock ? `Félicitation ! Vous avez explosé vos objectifs hier 👏` : `Utilisateur introuvable`;
+    return (
+        &lt;header>
+            &lt;h1>
+                Bonjour &lt;span className="username">{name}&lt;/span>
+            &lt;/h1>
+            &lt;p id="message">{!mock ? message : "Utilisateur introuvable"}&lt;/p>
+        &lt;/header>
+    );
+};
 
-    /**
-     * With this method, you can call api to get datas.
-     * 
-     * @param {String}  type - The type of data you want => informations, activities, averageSessions, performences.
-     * @returns {Promise&lt;any>} - Response of api
-     */
-    async get(type) {
-        const resuestUrl = this.url + this.urlRequests[type];
-        return fetch(resuestUrl)
-            .then(response => response.json())
-            .then(json => {
-                return json.data
-            })
-            .catch(err => err);
-    }
-}</code></pre>
+Header.propTypes = {
+    name: PropTypes.string,
+    mock: PropTypes.bool.isRequired,
+};
+
+export default Header;
+</code></pre>
         </article>
     </section>
 

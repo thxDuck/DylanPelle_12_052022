@@ -1,14 +1,16 @@
 import { Routes, Route } from "react-router-dom";
-import Main from "../components/pages/Main";
-import Error from "../components/pages/Error";
-import ERRORS from "../services/errors";
 import SelectUser from "../components/pages/SelectUser";
+import Error from "../components/pages/Error";
+import Main from "../components/pages/Main";
+
+import ERRORS from "../services/errors";
 
 /**
  *
- * @description This is the routes for the app. Allowed routes are : ["", "/", "/${userId}"].
+ * This is the routes for the app. Allowed routes are : ["", "/", "/${userId}"].
+ * @returns {React-Router-Dom} Router component with all routes.
  */
-function RoutesApp() {
+const RoutesApp = () => {
     return (
         <Routes>
             <Route path="/:id" element={<Main />} />

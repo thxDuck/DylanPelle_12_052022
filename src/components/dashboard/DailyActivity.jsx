@@ -1,14 +1,13 @@
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from "recharts";
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from "recharts";
 
-import User from "../../services/User";
 import utils from "../../services/utils.js";
+import User from "../../services/User";
 
 /**
- * TODO : Describe component.
- *
- * @returns {JSX.Element}
+ * This component displays the daily activity chart with values from the API.
+ * @returns {React.FunctionComponent} - Nothing while the api has not responded, then barChart with the daily weight and calories burned of current week.
  */
 const DailyActivity = () => {
     const params = useParams();

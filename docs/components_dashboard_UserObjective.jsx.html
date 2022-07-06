@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: services/UserApi.js</title>
+    <title>JSDoc: Source: components/dashboard/UserObjective.jsx</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: services/UserApi.js</h1>
+    <h1 class="page-title">Source: components/dashboard/UserObjective.jsx</h1>
 
     
 
@@ -26,41 +26,53 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>import config from './config.json';
+            <pre class="prettyprint source linenums"><code>import React from "react";
+import { PieChart, Pie, Cell, ResponsiveContainer } from "recharts";
+import PropTypes from "prop-types";
 
 
 /**
- * @class UserApi
- * @description Class to call the api of the user.
+ * This Pie chart contains completion the user objective in percentage. Need te get score property in a value between 0 and 0.1.
+ * @returns {React.FunctionComponent} - Pie chart with objective completion percentage.
  */
-export default class UserApi {
-    constructor(userId) {
-        this.userId = userId;
-        this.url = `${config.baseUrl}/user/${this.userId}`;
-        this.urlRequests = {
-            informations: "",
-            activities: "/activity",
-            averageSessions: "/average-sessions",
-            performences: "/performance",
-        };
-    }
-
+const UserObjective = (props) => {
+    const score = props.score * 100;
     /**
-     * With this method, you can call api to get datas.
-     * 
-     * @param {String}  type - The type of data you want => informations, activities, averageSessions, performences.
-     * @returns {Promise&lt;any>} - Response of api
+     * To draw the pie chart, we need to find the percentage of score and rest to get 100%.
+     * (ex: score = 20%, rest = 80%, total 100%)
      */
-    async get(type) {
-        const resuestUrl = this.url + this.urlRequests[type];
-        return fetch(resuestUrl)
-            .then(response => response.json())
-            .then(json => {
-                return json.data
-            })
-            .catch(err => err);
-    }
-}</code></pre>
+    const rest = 100 - score;
+    const percentage = score + "%";
+    const data = [
+        { name: "Score", value: score, fill: "#FF0000" },
+        { name: "", value: rest, fill: "none" },
+    ];
+    return (
+        &lt;div id="userObjective">
+            &lt;div className="title">
+                &lt;p>Score&lt;/p>
+            &lt;/div>
+            &lt;ResponsiveContainer width="100%" height="100%">
+                &lt;PieChart>
+                    &lt;Pie alignmentBaseline="center" data={data} isAnimationActive={true} cx="50%" cy="50%" endAngle={450} startAngle={90} autoReverse={true} innerRadius="75%" outerRadius="85%" fill="#8884d8" dataKey="value">
+                        {data.map((entry, index) => (
+                            &lt;Cell key={`cell-${index}`} fill={entry.fill} />
+                        ))}
+                    &lt;/Pie>
+                &lt;/PieChart>
+            &lt;/ResponsiveContainer>
+            &lt;div className="label-objective">
+                &lt;p className="percentage">{percentage}&lt;/p>
+                &lt;p>De votre objectif&lt;/p>
+            &lt;/div>
+        &lt;/div>
+    );
+};
+UserObjective.propTypes = {
+    score: PropTypes.number.isRequired,
+};
+
+export default UserObjective;</code></pre>
         </article>
     </section>
 
