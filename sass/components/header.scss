@@ -1,0 +1,17 @@
+header {
+    @include col;
+
+    h1 {
+        font-size: 2.7rem;
+        font-weight: 500;
+
+        .username {
+            color: $primary;
+        }
+    }
+
+    p {
+        margin: 1.3rem 0;
+    }
+
+}

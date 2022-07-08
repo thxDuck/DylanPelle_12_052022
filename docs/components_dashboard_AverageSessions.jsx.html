@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: components/dashboard/AverageSessions.jsx</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: components/dashboard/AverageSessions.jsx</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import { LineChart, Line, Tooltip, XAxis, ResponsiveContainer } from "recharts";
+import React, { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
+
+import User from "../../services/User";
+import utils from "../../services/utils.js";
+
+/**
+ * This component displays the average sessions length chart of current week.
+ *
+ * @returns {React.FunctionComponent} - Nothing while the api has not responded, then Line chart with the average sessions length
+ */
+const AverageSessions = () => {
+    const params = useParams();
+    const userId = params.id;
+
+    // sessions contain the user sessions length of the week. If there no data found, a mock data will be displayed.
+    const [sessions, setSessions] = useState(false);
+
+    useEffect(() => {
+        const getData = async (user) => {
+            const data = await user.getAverageSessions();
+            if (!!data.error) {
+                utils.displayMessageInModal(data.message);
+                setSessions(utils.mocks.averageSessions);
+            } else {
+                setSessions(data);
+            }
+        };
+        const user = new User(userId);
+        getData(user);
+    }, [userId]);
+
+    return !sessions ? (
+        ""
+    ) : (
+        &lt;div id="averageSessions">
+            &lt;div className="title">
+                &lt;p>
+                    Durée moyenne des
+                    &lt;br />
+                    sessions
+                &lt;/p>
+            &lt;/div>
+            &lt;ResponsiveContainer width="100%" height="80%">
+                &lt;LineChart data={sessions}>
+                    &lt;Line strokeDashArray="4 1 2" type="monotone" margin={{ top: 50, right: 20, bottom: 5, left: 0 }} aria-valuemax={500} dataKey="sessionLength" dot={false} stroke="#fff" strokeWidth="2" tickLine={false} />
+                    &lt;XAxis dataKey="day" stroke="#fff" tickLine={false} tickMargin={15} axisLine={false} />
+                    &lt;Tooltip content={&lt;CustomTooltip />} cursor={false} />
+                &lt;/LineChart>
+            &lt;/ResponsiveContainer>
+        &lt;/div>
+    );
+};
+
+/**
+ * Custom tooltip for the average sessions chart. We display the time in minutes.
+ *
+ * @param {Boolean} active - The active state of the tooltip.
+ * @param {Array} payload - Contain data of the current day hovered.
+ * @returns {HTMLElement} - The tooltip element.
+ */
+const CustomTooltip = ({ active, payload }) => {
+    if (active) {
+        const sessionLength = `${payload[0].payload.sessionLength} min`;
+        return (
+            &lt;div className="custom-tooltip">
+                &lt;p className="label">{sessionLength}&lt;/p>
+            &lt;/div>
+        );
+    }
+};
+
+export default AverageSessions;
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="module.exports_module.exports.html">exports</a></li><li><a href="User.html">User</a></li><li><a href="UserApi.html">UserApi</a></li></ul><h3>Global</h3><ul><li><a href="global.html#App">App</a></li><li><a href="global.html#AverageSessions">AverageSessions</a></li><li><a href="global.html#Card">Card</a></li><li><a href="global.html#closeModal">closeModal</a></li><li><a href="global.html#CustomTooltip">CustomTooltip</a></li><li><a href="global.html#DailyActivity">DailyActivity</a></li><li><a href="global.html#Dashboard">Dashboard</a></li><li><a href="global.html#Error">Error</a></li><li><a href="global.html#ERRORS">ERRORS</a></li><li><a href="global.html#formatKeyForCards">formatKeyForCards</a></li><li><a href="global.html#get">get</a></li><li><a href="global.html#getActivities">getActivities</a></li><li><a href="global.html#getAverageSessions">getAverageSessions</a></li><li><a href="global.html#getInformations">getInformations</a></li><li><a href="global.html#getPerformances">getPerformances</a></li><li><a href="global.html#Header">Header</a></li><li><a href="global.html#HorizontalNav">HorizontalNav</a></li><li><a href="global.html#ICONS">ICONS</a></li><li><a href="global.html#Main">Main</a></li><li><a href="global.html#mocked_activities">mocked_activities</a></li><li><a href="global.html#mocked_averageSessions">mocked_averageSessions</a></li><li><a href="global.html#mocked_performances">mocked_performances</a></li><li><a href="global.html#mocked_userInformation">mocked_userInformation</a></li><li><a href="global.html#mocks">mocks</a></li><li><a href="global.html#Modal">Modal</a></li><li><a href="global.html#PAGE_NOT_EXIST">PAGE_NOT_EXIST</a></li><li><a href="global.html#RoutesApp">RoutesApp</a></li><li><a href="global.html#SelectUser">SelectUser</a></li><li><a href="global.html#UserInformations">UserInformations</a></li><li><a href="global.html#UserObjective">UserObjective</a></li><li><a href="global.html#UserPerformances">UserPerformances</a></li><li><a href="global.html#utils">utils</a></li><li><a href="global.html#VerticalNav">VerticalNav</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.10</a> on Fri Jul 08 2022 12:22:09 GMT+0200 (Central European Summer Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

@@ -1,0 +1,44 @@
+.card {
+    background-color: $light-gray;
+    @include row;
+    padding-left: 20%;
+    gap: 1rem;
+    align-items: center;
+    border-radius: 6px;
+
+    @media (max-width: 1200px) {
+        font-size: 0.9rem;
+    }
+
+    &__icon {
+        @include col-justify(center);
+
+        border-radius: 6px;
+        padding: 1rem;
+
+        max-width: 60px;
+        max-height: 60px;
+
+        img {
+            width: auto;
+        }
+    }
+
+    &__text {
+        @include col-justify(center);
+        gap: 5px;
+
+        width: 25%;
+        height: 50%;
+
+        &--val {
+            font-weight: 700;
+            color: #282D30;
+        }
+
+        &--title {
+            font-size: 0.8rem;
+            color: #74798C;
+        }
+    }
+}

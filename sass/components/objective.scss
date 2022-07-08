@@ -1,0 +1,51 @@
+#userObjective {
+    background-color: $light-gray;
+
+    @include col-align(center);
+    border-radius: 5px;
+
+    .title {
+        align-self: flex-start;
+        position: absolute;
+        height: 0;
+
+        p {
+            margin-left: 1.5rem;
+            margin-top: 1rem;
+
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: #20253A;
+        }
+
+        @media (max-width:1200px) {
+            margin-left: -10px;
+            margin-top: 0;
+        }
+    }
+
+
+    .label-objective {
+        position: absolute;
+        bottom: 20%;
+
+        p {
+            font-weight: 500;
+            text-align: center;
+            text-justify: inter-word;
+            color: lighten(#282D30, 30%);
+        }
+
+        .percentage {
+            font-weight: 700;
+            font-size: 1.3rem;
+            color: #282D30;
+            margin-bottom: 0.6rem;
+
+            @media (min-width:1200px) {
+                font-size: 1.5rem;
+            }
+        }
+
+    }
+}

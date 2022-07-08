@@ -1,0 +1,69 @@
+#dashboard {
+    @include row;
+    height: inherit;
+    gap: 2rem;
+
+    .container {
+        @include col-justify(space-around);
+        gap: 2rem;
+        width: 75%;
+        height: 100%;
+
+        .bottom-row {
+            @include row-justify(space-between);
+            gap: 1rem;
+            min-height: 200px;
+            width: 100%;
+            height: 45%;
+
+            &>div {
+                min-width: 200px;
+                width: 30%;
+            }
+        }
+    }
+
+    .informationCards {
+        @include col-justify(space-between);
+        width: 25%;
+        height: 100%;
+        gap: 2rem;
+
+        &>div {
+            height: 100%;
+        }
+    }
+}
+
+#dailyActivity {
+    height: 55%;
+    background-color: $light-gray;
+}
+
+#calories {
+    .card__icon {
+        background-color: lighten($caloriesColor, 40%);
+        color: $caloriesColor;
+    }
+}
+
+#protein {
+    .card__icon {
+        background-color: lighten($proteinColor, 30%);
+        color: $proteinColor;
+    }
+}
+
+#carb {
+    .card__icon {
+        background-color: lighten($carbColor, 33%);
+        color: $carbColor;
+    }
+}
+
+#lipid {
+    .card__icon {
+        background-color: lighten($lipidColor, 30%);
+        color: $lipidColor;
+    }
+}

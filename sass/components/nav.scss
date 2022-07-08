@@ -1,0 +1,67 @@
+nav {
+    height: 100%;
+
+    .navbar-top {
+        background-color: $dark;
+        color: #fff;
+        height: 5rem;
+
+        .logo {
+            @include row;
+            padding-left: 25px;
+
+            img {
+                margin: auto;
+            }
+        }
+
+        width: 100%;
+        @include row;
+
+        &__pages {
+            width: 100%;
+            @include row;
+
+            ul {
+                width: 100%;
+                @include row-justify(space-around);
+                padding: 30px 0px;
+                font-size: 1.5rem;
+            }
+        }
+
+    }
+
+    .navbar-left {
+        background-color: $dark;
+        color: #fff;
+        height: calc(100% - 5rem);
+        width: 5.5rem;
+        @include col-justify(space-evenly);
+
+        &__activities {
+            @include row-justify(center);
+
+            ul {
+                @include col-justify(center);
+                padding: 1rem;
+                gap: 20px;
+            }
+        }
+
+        .copyright {
+            font-size: 0.75rem;
+            transform: rotate(-90deg);
+            width: max-content;
+            align-self: center;
+        }
+    }
+
+    li {
+        transition: all 0.3s ease-in-out;
+
+        &:hover {
+            transform: scale(1.15);
+        }
+    }
+}

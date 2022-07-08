@@ -1,0 +1,30 @@
+#dailyActivity {
+    @include col-justify(flex-end);
+    border-radius: 5px;
+    color: #fff;
+
+    .title {
+        position: relative;
+        left: 5%;
+        top: 5%;
+
+        font-size: 1rem;
+        font-weight: 500;
+        color: #20253a;
+    }
+
+    .custom-tooltip {
+        background-color: $primary;
+        font-size: 0.75rem;
+
+        p {
+            padding: 5px;
+            text-align: center;
+        }
+    }
+
+    .recharts-legend-item-text {
+        color: #74798C !important;
+        font-size: 0.85rem;
+    }
+}
