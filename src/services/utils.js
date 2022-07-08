@@ -1,12 +1,12 @@
-import mocks from "./Mocks";
+import mocks from "./mocks";
 
 /**
- * Utils contains all utilities functions, variables that are used in the app.
- * To use utils functions, import this file and call Utils.functionName().
+ * Utils contains all utility functions, variables that are used in the app.
+ * To use these functions, import this file and call Utils.functionName().
  */
 const utils = {
     /**
-     * Empty modal if you want, put message and display modal.
+     * Empty modal if you want, put a message and display modal.
      * 
      * @param {String} message - The message to add in the modal
      * @param {Boolean} emptyFirst - If the modal need to be empty or not

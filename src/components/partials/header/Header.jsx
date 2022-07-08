@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 
 /**
- * Header component displays the name of the user and a message. If it's a mock, dipslay error message
+ * Header component displays the name of the user and a message. If it's a mock, display error message
  *
  * @param {string} name - Name of user
  * @param {bool} mock - If is a mocked user

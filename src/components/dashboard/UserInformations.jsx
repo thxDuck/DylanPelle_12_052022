@@ -8,60 +8,33 @@ import proteinIcon from "../../assets/images/icons/protein.svg";
 import lipidIcon from "../../assets/images/icons/lipid.svg";
 
 /**
- * Data by key is an object that contains the key name and the icon and unit of the data to display labels in french.
+ * Group icons in constant for using the same icon for different nutriments.
  */
-const dataByKey = {
-    calorieCount: {
-        name: "Calories",
-        unit: "kCal",
-        id: "calories",
-        icon: caloriesIcon,
-    },
-    proteinCount: {
-        name: "Protéines",
-        unit: "g",
-        id: "protein",
-        icon: proteinIcon,
-    },
-    carbohydrateCount: {
-        name: "Glucides",
-        unit: "g",
-        id: "carb",
-        icon: carbohydrateIcon,
-    },
-    lipidCount: {
-        name: "Lipides",
-        unit: "g",
-        id: "lipid",
-        icon: lipidIcon,
-    },
+const ICONS = {
+    carbohydrateIcon,
+    caloriesIcon,
+    proteinIcon,
+    lipidIcon,
 };
 
 /**
- * This is the component that contains cards with informations about nutriments of user.
+ * This is the component that contains cards with information about nutriments the user.
  * @param {{}} props - Values of nutriments of the user
  * @returns {React.FunctionComponent} - Components contains all cards with nutriment informations.
  */
 const UserInformations = (props) => {
     const userInformations = props.userInformations;
 
-    // Key names must be the same as in the userInformations properties.
-    const keyNames = Object.keys(dataByKey);
     return (
         <div className="informationCards">
-            {keyNames.map((key) => (
-                <Card key={key} id={dataByKey[key].id} title={dataByKey[key].name} icon={dataByKey[key].icon} unit={dataByKey[key].unit} value={userInformations[key]} />
+            {userInformations.map((key, i) => (
+                <Card key={i} id={key.name} title={key.name} icon={ICONS[key.icon]} unit={key.unit} value={key.value} />
             ))}
         </div>
     );
 };
 
 UserInformations.propTypes = {
-    userInformations: PropTypes.exact({
-        calorieCount: PropTypes.number.isRequired,
-        proteinCount: PropTypes.number.isRequired,
-        carbohydrateCount: PropTypes.number.isRequired,
-        lipidCount: PropTypes.number.isRequired,
-    }),
+    userInformations: PropTypes.array.isRequired,
 };
 export default UserInformations;

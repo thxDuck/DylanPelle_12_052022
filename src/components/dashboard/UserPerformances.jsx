@@ -6,39 +6,39 @@ import utils from "../../services/utils.js";
 import User from "../../services/User";
 
 /**
- * 
- * @returns {React.FunctionComponent} - Nothing while the api has not responded, then Radar chart with performence of user.
+ * This component displays the performance chart with values from the API.
+ * @returns {React.FunctionComponent} - Nothing while the API has not responded, then Radar chart performances of the user.
  */
-const UserPerformences = () => {
+const UserPerformances = () => {
     const params = useParams();
     const userId = params.id;
 
-    // performences contains the user performences values. If there no data found, a mock data will be displayed.
-    const [performences, setPerformences] = useState(false);
+    // Performances contain the user performance values. If there no data found, a mock data will be displayed.
+    const [performances, setPerformances] = useState(false);
 
     useEffect(() => {
         const getData = async (user) => {
-            const data = await user.getPerformence();
+            const data = await user.getPerformances();
             if (!!data.error) {
                 utils.displayMessageInModal(data.message);
-                setPerformences(utils.mocks.performences);
+                setPerformances(utils.mocks.performances);
             } else {
-                setPerformences(data);
+                setPerformances(data);
             }
         };
         const user = new User(userId);
         getData(user);
     }, [userId]);
 
-    return !performences ? (
+    return !performances ? (
         ""
     ) : (
-        <div id="userPerformence">
+        <div id="userPerformances">
             <ResponsiveContainer width="100%" height="100%">
-                <RadarChart outerRadius="100%" data={performences} margin={{ top: 0, right: 15, left: 15, bottom: 0 }}>
+                <RadarChart outerRadius="100%" data={performances} margin={{ top: 0, right: 15, left: 15, bottom: 0 }}>
                     <PolarGrid radialLines={false} />
                     <PolarAngleAxis axisLine={true} tickCount={4} dataKey="label" stroke="#fff" tickLine={false} />
-                    {performences.map((perf, i) => (
+                    {performances.map((perf, i) => (
                         <Radar key={i} name={perf.label} dataKey="value" fill="#FF0101" fillOpacity={0.2} padding={{ top: "15px" }} />
                     ))}
                 </RadarChart>
@@ -47,4 +47,4 @@ const UserPerformences = () => {
     );
 };
 
-export default UserPerformences;
+export default UserPerformances;

@@ -328,7 +328,7 @@ header p {
   }
 }
 
-#userPerformence {
+#userPerformances {
   background-color: #282D30;
   border-radius: 5px;
   padding: 25px;
@@ -336,11 +336,11 @@ header p {
   font-size: 0.7rem;
 }
 @media (min-width: 1200px) {
-  #userPerformence {
+  #userPerformances {
     font-size: 0.9rem;
   }
 }
-#userPerformence .recharts-surface {
+#userPerformances .recharts-surface {
   overflow: visible;
 }
 

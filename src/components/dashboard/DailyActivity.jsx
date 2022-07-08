@@ -7,13 +7,13 @@ import User from "../../services/User";
 
 /**
  * This component displays the daily activity chart with values from the API.
- * @returns {React.FunctionComponent} - Nothing while the api has not responded, then barChart with the daily weight and calories burned of current week.
+ * @returns {React.FunctionComponent} - Nothing while the api has not responded, then bar chart with the daily weight and calories burned of current week.
  */
 const DailyActivity = () => {
     const params = useParams();
     const userId = params.id;
 
-    // activities contains the user activities of the week. If there no data found, a mock data will be displayed.
+    // Activities contains the user activities of the week. If there no data found, a mock data will be displayed.
     const [activities, setActivities] = useState(utils.mocks.activities);
 
     useEffect(() => {
@@ -61,7 +61,7 @@ const DailyActivity = () => {
                             { id: "legend-cal", value: "Calories brûlées (kCal)", type: "circle", color: "#E60000" },
                         ]}
                     />
-                    <XAxis dataKey="day" tickMargin="15" />
+                    <XAxis dataKey="formattedDay" tickMargin="15" />
                     <YAxis yAxisId="right" orientation="right" tickLine={false} axisLine={true} type="number" domain={["dataMin - 2", "dataMax + 2"]} tickCount="4" />
                     <YAxis yAxisId="left" orientation="left" hide={true} />
                     <CartesianGrid vertical={false} />

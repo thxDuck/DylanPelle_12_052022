@@ -3,25 +3,26 @@ import PropTypes from "prop-types";
 
 import DailyActivity from "./DailyActivity.jsx";
 import AverageSessions from "./AverageSessions.jsx";
-import UserPerformence from "./UserPerformence.jsx";
+import UserPerformances from "./UserPerformances.jsx";
 import UserObjective from "./UserObjective.jsx";
 import UserInformations from "./UserInformations.jsx";
 
 /**
- * This is the component that contains all charts and informations about the user. 
- * 
- * @returns {React.FunctionComponent} - Nothing while the api has not responded, then Linechart with the average sessions length
+ * This is the component that contains all charts and information about the user.
+ *
+ * @returns {React.FunctionComponent} - Nothing while the api has not responded, then Line chart with the average session length
  */
 const Dashboard = (props) => {
     const score = props.score;
     const userInformations = props.userInformations;
+
     return (
         <section id="dashboard">
             <div className="container">
                 <DailyActivity />
                 <div className="bottom-row">
                     <AverageSessions />
-                    <UserPerformence />
+                    <UserPerformances />
                     <UserObjective score={score} />
                 </div>
             </div>
@@ -32,12 +33,7 @@ const Dashboard = (props) => {
 
 Dashboard.propTypes = {
     score: PropTypes.number.isRequired,
-    userInformations: PropTypes.exact({
-        calorieCount: PropTypes.number.isRequired,
-        proteinCount: PropTypes.number.isRequired,
-        carbohydrateCount: PropTypes.number.isRequired,
-        lipidCount: PropTypes.number.isRequired,
-    }),
+    userInformations: PropTypes.array.isRequired,
 };
 
 export default Dashboard;

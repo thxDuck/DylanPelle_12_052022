@@ -7,7 +7,7 @@ import ERRORS from "../services/errors";
 
 /**
  *
- * This is the routes for the app. Allowed routes are : ["", "/", "/${userId}"].
+ * This is the routes for the app. Allowed routes are: ["", "/", "/${userId}"].
  * @returns {React-Router-Dom} Router component with all routes.
  */
 const RoutesApp = () => {
@@ -18,6 +18,6 @@ const RoutesApp = () => {
             <Route path="*" element={<Error msg={ERRORS.PAGE_NOT_EXIST.msg} code={ERRORS.PAGE_NOT_EXIST.code} />} />
         </Routes>
     );
-}
+};
 
 export default RoutesApp;

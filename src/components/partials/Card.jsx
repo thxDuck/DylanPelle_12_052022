@@ -1,9 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-
 /**
- * Display nutriment informations with correct icon and color.
+ * Display nutriment with icon, color and value.
  * @returns {React.FunctionComponent} - Nutriment card.
  */
 const Card = (props) => {

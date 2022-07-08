@@ -2,15 +2,14 @@ import React from "react";
 import { PieChart, Pie, Cell, ResponsiveContainer } from "recharts";
 import PropTypes from "prop-types";
 
-
 /**
- * This Pie chart contains completion the user objective in percentage. Need te get score property in a value between 0 and 0.1.
+ * This Pie chart contains completion the user objective in percentage. Need to get score property in a value between 0 and 100.
  * @returns {React.FunctionComponent} - Pie chart with objective completion percentage.
  */
 const UserObjective = (props) => {
-    const score = props.score * 100;
+    const score = props.score;
     /**
-     * To draw the pie chart, we need to find the percentage of score and rest to get 100%.
+     * To draw the pie chart, we need to find the percentage score and rest to get 100%.
      * (ex: score = 20%, rest = 80%, total 100%)
      */
     const rest = 100 - score;

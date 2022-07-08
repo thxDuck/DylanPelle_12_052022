@@ -13,19 +13,19 @@ export default class UserApi {
             informations: "",
             activities: "/activity",
             averageSessions: "/average-sessions",
-            performences: "/performance",
+            performances: "/performance",
         };
     }
 
     /**
-     * With this method, you can call api to get datas.
+     * With this method, you can call the API to get data.
      * 
-     * @param {String}  type - The type of data you want => informations, activities, averageSessions, performences.
-     * @returns {Promise<any>} - Response of api
+     * @param {String}  type - The type of data you want => informations, activities, averageSessions, performances.
+     * @returns {Promise<any>} - Response of API
      */
     async get(type) {
-        const resuestUrl = this.url + this.urlRequests[type];
-        return fetch(resuestUrl)
+        const requestUrl = this.url + this.urlRequests[type];
+        return fetch(requestUrl)
             .then(response => response.json())
             .then(json => {
                 return json.data

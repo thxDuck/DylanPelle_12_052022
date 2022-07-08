@@ -5,17 +5,16 @@ import { useParams } from "react-router-dom";
 import User from "../../services/User";
 import utils from "../../services/utils.js";
 
-
 /**
  * This component displays the average sessions length chart of current week.
- * 
- * @returns {React.FunctionComponent} - Nothing while the api has not responded, then Linechart with the average sessions length
+ *
+ * @returns {React.FunctionComponent} - Nothing while the api has not responded, then Line chart with the average sessions length
  */
 const AverageSessions = () => {
     const params = useParams();
     const userId = params.id;
 
-    // sessions contains the user sessions length of the week. If there no data found, a mock data will be displayed.
+    // sessions contain the user sessions length of the week. If there no data found, a mock data will be displayed.
     const [sessions, setSessions] = useState(false);
 
     useEffect(() => {
@@ -58,7 +57,7 @@ const AverageSessions = () => {
  * Custom tooltip for the average sessions chart. We display the time in minutes.
  *
  * @param {Boolean} active - The active state of the tooltip.
- * @param {Array} payload - Contains data of the current day hovered.
+ * @param {Array} payload - Contain data of the current day hovered.
  * @returns {HTMLElement} - The tooltip element.
  */
 const CustomTooltip = ({ active, payload }) => {
