@@ -1,4 +1,4 @@
-import mocks from "./mocks";
+import mocks from "./Mocks";
 
 /**
  * Utils contains all utility functions, variables that are used in the app.
