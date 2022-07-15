@@ -100,11 +100,12 @@ export default class User {
 			const activities = await this.api.get("activities")
 			const row_sessions = activities.sessions;
 
-			return row_sessions.map((session) => {
-				const formattedDay = new Date(session.date).getDay()
+			const sessions = row_sessions.map((session) => {
+				const formattedDay = new Date(session.day).getDay()
 				return { ...session, formattedDay }
 			});
-
+			sessions.sort((a, b) => a.formattedDay - b.formattedDay)
+			return sessions;
 		} catch (error) {
 			this.error.message = "Activités non trouvées."
 			return this.error
