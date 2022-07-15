@@ -41,7 +41,6 @@ export default class User {
 
 			formattedUser.score = score;
 			formattedUser.keyData = this.formatKeyForCards(user.keyData);
-			console.log('formattedUser => ', formattedUser);
 			return formattedUser;
 
 		} catch (error) {
@@ -121,8 +120,9 @@ export default class User {
 			const DAYS = ["L", "M", "M", "J", "V", "S", "D"]
 			const averageSessions = await this.api.get("averageSessions");
 
-			return averageSessions.sessions.map((session) => {
-				return { ...session, day: DAYS[session.day] }
+			return DAYS.map((day, i) => {
+				const session = averageSessions.sessions.find(s => s.day === i + 1)
+				return { ...session, day: DAYS[i] }
 			});
 
 		} catch (error) {
